@@ -1,0 +1,58 @@
+{% extends 'portfolio/base.html' %}
+
+{% block title %}{{ album.title }} | {{ site_settings.site_title }}{% endblock %}
+
+{% load static %}
+
+{% block content %}
+<!-- Page Background -->
+<div class="anita-page-background-wrap">
+    <div class="anita-page-background" data-src="{{ album.cover_image.url }}" data-opacity="0.05"></div>
+</div>
+
+<!-- Page Main -->
+<main class="anita-main">
+    <!-- Page Container -->
+    <div class="anita-container">
+        <!-- Page Title -->
+        <section class="anita-section">
+            <div class="anita-album-title">
+                <div class="anita-albums-back-wrap" data-aos="fade-up">
+                    <a href="{% url 'album_list' %}" class="anita-albums-back">Back to Galleries</a>
+                </div>
+                <h1 class="anita-page-title" data-aos="fade-up" data-aos-delay="50">{{ album.title }}</h1>
+                <div class="anita-post-meta anita-meta" data-aos="fade-up" data-aos-delay="100">
+                    <span>{{ album.category.name }}</span>
+                    <span>{{ photos.count }} Photos</span>
+                </div>
+            </div>
+            {% if album.description %}
+            <div class="anita-page-intro anita-offset-left--33" data-aos="fade-up" data-aos-delay="150">
+                <p>{{ album.description }}</p>
+            </div>
+            {% endif %}
+        </section>
+
+        <!-- Page Content - Masonry Grid Gallery -->
+        <section class="anita-section" data-aos="fade-up">
+            <div class="anita-masonry anita-grid-gallery anita-grid-3cols anita-zoom-hover anita-item-zoom-hover anita-item-fade-hover">
+                {% for photo in photos %}
+                <!-- Gallery Item -->
+                <div class="anita-grid-gallery-item">
+                    <div class="anita-grid-item__inner">
+                        <div class="anita-grid-item__image">
+                            <img src="{{ photo.image.url }}" alt="{{ photo.title }}" width="1200" height="960">
+                        </div>
+                        <a href="{{ photo.image.url }}" class="anita-lightbox-link" data-size="1200x960"></a>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="anita-grid-item__inner">
+                    <p>No photos in this album yet.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+</main>
+{% endblock %}
