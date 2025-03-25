@@ -63,11 +63,25 @@ def album_detail(request, slug):
     """View for displaying a specific album and its photos"""
     album = get_object_or_404(Album, slug=slug, is_published=True)
     photos = album.photos.all()
-    site_settings = get_site_settings()
+    
+    # Get the next album for the "next album" section
+    try:
+        next_album = Album.objects.filter(
+            is_published=True, 
+            order__gt=album.order
+        ).order_by('order').first()
+        
+        if not next_album:
+            # If no album with higher order, get the first album (circular)
+            next_album = Album.objects.filter(
+                is_published=True
+            ).exclude(id=album.id).order_by('order').first()
+    except:
+        next_album = None
     
     context = {
         'album': album,
         'photos': photos,
-        'site_settings': site_settings,
+        'next_album': next_album,
     }
     return render(request, 'portfolio/album_detail.html', context)
