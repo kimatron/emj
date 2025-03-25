@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ site_settings.site_title }} | {{ site_settings.tagline }}{% endblock %}
+
+{% load static %}
+
+{% block content %}
+<!-- Page Main -->
+<main class="anita-main">
+    <!-- WebGL Carousel Gallery -->
+    <div class="anita-gl-container-wrap anita-albums-listing anita-gl-carousel-gallery-wrap anita-scrollEW">
+        <div class="anita-gl-container anita-gl-carousel-gallery" data-prev-label="Previous Work" data-next-label="Next Work">
+            
+            {% for album in featured_albums %}
+            <!-- Gallery Item -->
+            <div class="anita-gl-gallery-item" data-src="{{ album.cover_image.url }}" data-size="1440x1080">
+                <div class="anita-gl-gallery-item__content" data-aos="fade-up">
+                    <span class="anita-meta anita-gl-gallery__meta">{{ album.category.name }}</span>
+                    <h2 class="anita-gl-gallery__caption">
+                        <sup>{{ forloop.counter }}.</sup>{{ album.title }}
+                    </h2>
+                    <span class="anita-gl-gallery__explore">Explore</span>
+                    <a href="{{ album.get_absolute_url }}" class="anita-album-link"></a>
+                </div>
+            </div>
+            {% empty %}
+            <div class="anita-gl-gallery-item">
+                <div class="anita-gl-gallery-item__content" data-aos="fade-up">
+                    <h2 class="anita-gl-gallery__caption">
+                        No albums to display yet
+                    </h2>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+{% endblock %}
