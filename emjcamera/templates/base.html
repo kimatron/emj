@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Page Title -->
+    <title>{% block title %}{{ site_settings.site_title }}{% endblock %}</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600;800&family=Rajdhani:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    {% load static %}
+    <link type="text/css" rel="stylesheet" href="{% static 'css/config.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/libs.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/responsive.css' %}">
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'img/favicon.png' %}" sizes="32x32" />
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Header -->
+    <header id="anita-header" class="anita-header">
+        <div class="anita-header-inner">
+            <div class="anita-logo-wrapper">
+                <!-- Logo -->
+                <a href="{% url 'home' %}" class="anita-logo is-retina">
+                    <img src="{% static 'img/logo.png' %}" alt="{{ site_settings.site_title }}" width="192" height="80">
+                </a>
+            </div>
+            <div class="anita-menu-wrapper">
+                <!-- Menu Toggle Button -->
+                <a href="#" class="anita-menu-toggler">
+                    <i class="anita-menu-toggler-icon"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Fullscreen Menu -->
+    <div class="anita-fullscreen-menu-wrap">
+        <nav class="anita-nav">
+            <ul class="main-menu">
+                <li {% if request.path == '/' %}class="current-menu-item"{% endif %}>
+                    <a href="{% url 'home' %}">Home</a>
+                </li>
+                <li {% if request.path == '/about/' %}class="current-menu-item"{% endif %}>
+                    <a href="{% url 'about' %}">About</a>
+                </li>
+                <li {% if request.path == '/albums/' %}class="current-menu-item"{% endif %}>
+                    <a href="{% url 'album_list' %}">Galleries</a>
+                </li>
+                <li {% if request.path == '/blog/' %}class="current-menu-item"{% endif %}>
+                    <a href="#">Blog</a>
+                </li>
+                <li {% if request.path == '/shop/' %}class="current-menu-item"{% endif %}>
+                    <a href="#">Shop</a>
+                </li>
+                <li {% if request.path == '/contact/' %}class="current-menu-item"{% endif %}>
+                    <a href="{% url 'contact' %}">Contact</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    {% block content %}{% endblock %}
+
+    <!-- Footer -->
+    <footer id="anita-footer">
+        <div class="anita-footer-inner">
+            <div class="anita-copyright">
+                Copyright &copy; {% now "Y" %}. All Rights Reserved.
+            </div>
+            <div class="anita-socials">
+                <ul class="anita-socials-list">
+                    {% if site_settings.instagram_url %}
+                    <li><a href="{{ site_settings.instagram_url }}" target="_blank">In.</a></li>
+                    {% endif %}
+                    {% if site_settings.facebook_url %}
+                    <li><a href="{{ site_settings.facebook_url }}" target="_blank">Fb.</a></li>
+                    {% endif %}
+                    {% if site_settings.twitter_url %}
+                    <li><a href="{{ site_settings.twitter_url }}" target="_blank">Tw.</a></li>
+                    {% endif %}
+                    {% if site_settings.pinterest_url %}
+                    <li><a href="{{ site_settings.pinterest_url }}" target="_blank">Pt.</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS Scripts -->
+    <script src="{% static 'js/lib/jquery.min.js' %}"></script>
+    <script src="{% static 'js/lib/aos.min.js' %}"></script>
+    <script src="{% static 'js/core.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
