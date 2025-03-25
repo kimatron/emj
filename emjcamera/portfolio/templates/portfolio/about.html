@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block title %}About | {{ site_settings.site_title }}{% endblock %}
+
+{% load static %}
+
+{% block content %}
+<!-- Page Background -->
+<div class="anita-page-background-wrap">
+    <div class="anita-page-background" data-src="{% if site_settings.about_image %}{{ site_settings.about_image.url }}{% else %}{% static 'img/background/about.jpg' %}{% endif %}" data-opacity="0.07"></div>
+</div>
+
+<!-- Page Main -->
+<main class="anita-main">
+    <!-- Page Container -->
+    <div class="anita-container">
+        <!-- Page Title -->
+        <section class="anita-section">
+            <div class="anita-page-title-wrap">
+                <h1 class="anita-page-title" data-aos="fade-up">Hey! I am Emilija,</h1>
+                <h2 class="anita-page-subtitle" data-aos="fade-up" data-aos-delay="50">A Professional Photographer</h2>
+            </div>
+            <div class="anita-page-intro anita-offset-left--33" data-aos="fade-up" data-aos-delay="100">
+                {{ site_settings.about_text|linebreaks }}
+            </div>
+        </section>
+
+        <!-- Section: Counters -->
+        <section class="anita-section">
+            <div class="anita-grid anita-grid--4cols anita-grid--tablet-2cols">
+                <!-- Counter Element -->
+                <div class="anita-counter" data-delay="3000" data-aos="zoom-out" data-aos-delay="100">
+                    <div class="anita-counter-number">
+                        7
+                    </div>
+                    <div class="anita-counter-label">
+                        Years of Experience
+                    </div>
+                </div>
+
+                <!-- Counter Element -->
+                <div class="anita-counter" data-delay="3000" data-aos="zoom-out" data-aos-delay="200">
+                    <div class="anita-counter-number">
+                        24
+                    </div>
+                    <div class="anita-counter-label">
+                        Awards Won
+                    </div>
+                </div>
+
+                <!-- Counter Element -->
+                <div class="anita-counter" data-delay="3000" data-aos="zoom-out" data-aos-delay="300">
+                    <div class="anita-counter-number">
+                        67
+                    </div>
+                    <div class="anita-counter-label">
+                        Projects Last Year
+                    </div>
+                </div>
+
+                <!-- Counter Element -->
+                <div class="anita-counter" data-delay="3000" data-aos="zoom-out" data-aos-delay="400">
+                    <div class="anita-counter-number">
+                        215
+                    </div>
+                    <div class="anita-counter-label">
+                        Happy Clients
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Studio/Where I Work -->
+        <section class="anita-section">
+            <div class="anita-grid anita-grid--33-66 anita-bottom-gap--medium anita-grid--tablet-1col">
+                <div data-aos="fade-up">
+                    <h2>
+                        <sup>01.</sup>
+                        Where I Work
+                    </h2>
+                </div>
+                <div data-aos="fade-up">
+                    <p>This is the place where I work with lights and shadows to create something brilliant. My photo studio is a creative space where we can discuss and create your photo portfolio in a comfortable and professional atmosphere.</p>
+                </div>
+            </div>
+
+            <!-- Grid Gallery -->
+            <div class="anita-grid-gallery-wrapper" data-aos="fade-up">
+                <div class="anita-grid-gallery anita-grid--2cols anita-zoom-hover">
+                    <!-- Grid Item 01 -->
+                    <div class="anita-grid-gallery-item">
+                        <a href="{% static 'img/studio/studio01.jpg' %}" class="anita-lightbox-link" data-size="1240x830" data-gallery="studio">
+                            <img src="{% static 'img/studio/studio01.jpg' %}" alt="Studio 01">
+                        </a>
+                    </div>
+                    <!-- Grid Item 02 -->
+                    <div class="anita-grid-gallery-item">
+                        <a href="{% static 'img/studio/studio02.jpg' %}" class="anita-lightbox-link" data-size="1240x830" data-gallery="studio">
+                            <img src="{% static 'img/studio/studio02.jpg' %}" alt="Studio 02">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Get in Touch -->
+        <section class="anita-section">
+            <div class="anita-cta" data-aos="fade-up">
+                <h2>
+                    Let's create something beautiful together!
+                </h2>
+                <div class="anita-caption">
+                    <a href="{% url 'contact' %}" class="anita-underline">Get in Touch</a>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+{% endblock %}
