@@ -85,3 +85,21 @@ class Contact(models.Model):
     
     def __str__(self):
         return f"{self.name} - {self.subject}"
+      
+class SiteSettings(models.Model):
+    """Global site settings"""
+    site_title = models.CharField(max_length=100, default="EmjCamera Photography")
+    tagline = models.CharField(max_length=200, blank=True)
+    about_text = models.TextField(blank=True)
+    about_image = models.ImageField(upload_to='site/', blank=True)
+    contact_info = models.TextField(blank=True)
+    facebook_url = models.URLField(blank=True)
+    instagram_url = models.URLField(blank=True)
+    twitter_url = models.URLField(blank=True)
+    pinterest_url = models.URLField(blank=True)
+    
+    class Meta:
+        verbose_name_plural = "Site Settings"
+    
+    def __str__(self):
+        return self.site_title
