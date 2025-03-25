@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact | {{ site_settings.site_title }}{% endblock %}
+
+{% load static %}
+
+{% block content %}
+<!-- Page Background -->
+<div class="anita-page-background-wrap">
+    <div class="anita-page-background" data-src="{% static 'img/background/contact.jpg' %}" data-opacity="0.05"></div>
+</div>
+
+<!-- Page Main -->
+<main class="anita-main">
+    <!-- Page Container -->
+    <div class="anita-container">
+        <!-- Page Title -->
+        <section class="anita-section">
+            <div class="anita-page-title-wrap">
+                <h1 class="anita-page-title" data-aos="fade-up">Contact Me</h1>
+            </div>
+            <div class="anita-page-intro anita-offset-left--33" data-aos="fade-up" data-aos-delay="100">
+                <p>Whether you're looking to book a session, inquire about print availability, or just want to say hello, I'd love to hear from you. Fill out the form below, or reach out directly via the contact information provided.</p>
+            </div>
+        </section>
+
+        <!-- Contact Information and Form -->
+        <section class="anita-section">
+            <div class="anita-grid anita-grid--33-66 anita-bottom-gap--medium anita-grid--tablet-1col">
+                <!-- Contact Info -->
+                <div data-aos="fade-up">
+                    <div class="anita-widget--contacts__descr">
+                        <h2>
+                            <sup>01.</sup>
+                            Contact Information
+                        </h2>
+                        {{ site_settings.contact_info|linebreaks }}
+                    </div>
+                    <div class="anita-contact-details">
+                        <ul class="anita-contact-details__list has-labels">
+                            <li>
+                                <i class="dashicons dashicons-email"></i>
+                                <a href="mailto:contact@emjcamera.com">contact@emjcamera.com</a>
+                            </li>
+                            <li>
+                                <i class="dashicons dashicons-phone"></i>
+                                <a href="tel:+11234567890">+1 (123) 456-7890</a>
+                            </li>
+                            <li>
+                                <i class="dashicons dashicons-location"></i>
+                                <a href="#">123 Photography Lane, Cityville, ST 12345</a>
+                            </li>
+                            <li>
+                                <i class="dashicons dashicons-calendar-alt"></i>
+                                <span>Monday - Friday: 9am - 6pm<br>Saturday: 10am - 4pm</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div data-aos="fade-up" data-aos-delay="100">
+                    <h2>
+                        <sup>02.</sup>
+                        Send a Message
+                    </h2>
+                    
+                    {% if messages %}
+                    <div class="anita-alert-success">
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    
+                    <form method="post" action="{% url 'contact' %}" class="anita-contact-form" data-fill-error="Please fill out the form manually.">
+                        {% csrf_token %}
+                        <div class="anita-input-wrap">
+                            <span>{{ form.name.label }}</span>
+                            {{ form.name }}
+                        </div>
+                        <div class="anita-input-wrap">
+                            <span>{{ form.email.label }}</span>
+                            {{ form.email }}
+                        </div>
+                        <div class="anita-input-wrap">
+                            <span>{{ form.phone.label }}</span>
+                            {{ form.phone }}
+                        </div>
+                        <div class="anita-input-wrap">
+                            <span>{{ form.subject.label }}</span>
+                            {{ form.subject }}
+                        </div>
+                        <div class="anita-input-wrap">
+                            <span>{{ form.message.label }}</span>
+                            {{ form.message }}
+                        </div>
+                        <div class="anita-contact-form__footer">
+                            <input type="submit" value="Send Message">
+                            <div class="anita-contact-form__response"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // JavaScript to handle form label animation on focus/input
+    document.addEventListener('DOMContentLoaded', function() {
+        const inputWraps = document.querySelectorAll('.anita-input-wrap');
+        
+        inputWraps.forEach(wrap => {
+            const input = wrap.querySelector('input, textarea');
+            
+            // Set initial state
+            if (input.value) {
+                wrap.classList.add('is-valued');
+            }
+            
+            // Handle focus
+            input.addEventListener('focus', () => {
+                wrap.classList.add('is-focus');
+                wrap.classList.add('is-valued');
+            });
+            
+            // Handle blur
+            input.addEventListener('blur', () => {
+                wrap.classList.remove('is-focus');
+                if (!input.value) {
+                    wrap.classList.remove('is-valued');
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}
