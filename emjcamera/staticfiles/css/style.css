@@ -1,9 +1,5 @@
 /*
-Author: Shadow Themes
-Author URL: https://shadow-themes.com
-Name: Anita Photography
-Version: 1.0
-License: Themeforest
+
 
 -----------------
 Table of Contents
@@ -64,7 +60,7 @@ Table of Contents
 
 13. BACK TO TOP
 
-14. INTERRACTIVE CURSOR
+14. INTERACTIVE CURSOR
     14.1 - General
     14.2 - Scroll Cursor
     14.3 - Cursor States
@@ -257,7 +253,7 @@ div.anita-bottom-gap--large {
 }
 .brickwall-grid:not(.animation--none) > div.brickwall-item {
 	transition: transform 0.4s, opacity 0.4s;
-	will-change: transform, opacity;
+    /* Removed will-change for optimization */
 }
 .brickwall-grid.animation--slow > div.brickwall-item {
 	transition: transform 0.8s, opacity 0.8s;
@@ -2749,7 +2745,7 @@ body.anita-unload.anita-show-menu .anita-nav {
     border-radius: 50%;
     opacity: 0;
     transition: opacity 0.3s, border 0.3s,
-    will-change: transform, opacity;
+    will-change:; transform, opacity;
 }
 
 /* --- Scroll Cursor --- */
