@@ -97,6 +97,8 @@ class SiteSettings(models.Model):
     instagram_url = models.URLField(blank=True)
     twitter_url = models.URLField(blank=True)
     pinterest_url = models.URLField(blank=True)
+    phone = models.CharField(max_length=20, blank=True)
+    email = models.EmailField(blank=True)
     
     class Meta:
         verbose_name_plural = "Site Settings"
