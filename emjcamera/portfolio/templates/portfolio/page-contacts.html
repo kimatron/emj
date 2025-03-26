@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Page Title -->
+    <title>Anita | Contacts</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600;800&family=Rajdhani:wght@700&display=swap" rel="stylesheet">
+    <!-- Template Config -->
+    <link type="text/css" rel="stylesheet" href="css/config.css">
+    <!-- Libraries -->
+    <link type="text/css" rel="stylesheet" href="css/libs.css">
+    <!-- Template Styles -->
+    <link type="text/css" rel="stylesheet" href="css/style.css">
+    <!-- Responsive -->
+    <link type="text/css" rel="stylesheet" href="css/responsive.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="img/favicon.png" sizes="32x32" />
+</head>
+<body>
+    <!-- Header -->
+    <header id="anita-header" class="anita-header">
+        <div class="anita-header-inner">
+            <div class="anita-logo-wrapper">
+                <!-- Logo -->
+                <a href="index.html" class="anita-logo is-retina">
+                    <img src="img/logo.png" alt="Anita Photography" width="192" height="80">
+                </a>
+            </div>
+            <div class="anita-menu-wrapper">
+                <!-- Menu Toggle Button -->
+                <a href="#" class="anita-menu-toggler">
+                    <i class="anita-menu-toggler-icon"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Fullscreen Menu -->
+    <div class="anita-fullscreen-menu-wrap">
+        <nav class="anita-nav anita-js-menu"></nav>
+    </div>
+
+    <!-- Page Background -->
+    <div class="anita-page-background-wrap">
+        <div class="anita-page-background" data-src="img/background/contacts.jpg" data-opacity="0.05"></div>
+    </div>
+
+    <!-- Page Main -->
+    <main class="anita-main">
+
+        <!-- Page Container -->
+		<div class="anita-container half-top-spacing half-bottom-spacing">
+
+            <!-- Page Title -->
+            <section class="anita-section anita-bottom-gap--medium">
+                <h1 class="anita-page-title" data-aos="fade-up">Get in Touch</h1>
+            </section>
+
+            <!-- Section: Content -->
+            <section class="anita-section">
+				<div class="anita-grid anita-grid--33-66 anita-grid--tablet-2cols">
+                    <!-- Contact Information -->
+                    <div class="anita-widget--contacts" data-aos="fade-up" data-aos-delay="100">
+                        <div class="anita-widget--contacts__descr">
+                            Here you can find our contact information to get in touch with me. You can also feel free to contact me using the form on the right.
+                        </div>
+                        <ul class="anita-contact-details__list has-labels">
+                            <li>
+                                <i class="dashicons dashicons-location-alt"></i>
+                                1800 11th Ave, San Francisco, CA 94122
+                            </li>
+                            <li>
+                                <i class="dashicons dashicons-email"></i>
+                                <a href="mailto:anita@example.com">anita@example.com</a>
+                            </li>
+                            <li>
+                                <i class="dashicons dashicons-phone"></i>
+                                <a href="tel:+12345556789">+1 (234) 555 - 67 - 89</a>
+                            </li>
+                            <li class="anita-contact-socials">
+                                <i class="dashicons dashicons-share"></i>
+                                <div class="anita-js-socials"></div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Contact Form -->
+					<div class="anita-contact-form-wrap" data-aos="fade-left" data-aos-delay="200">
+                        <form action="mail.php" method="post" class="anita-contact-form" data-fill-error="Please, fill out the contact form.">
+                            <div class="anita-grid anita-grid-small-gap anita-grid--3cols anita-grid--tablet-1col">
+                                <input type="text" id="name" name="name" placeholder="Your Name" required>
+                                <input type="email" id="email" name="email" placeholder="Your Email" required>
+                                <input type="tel" id="phone" name="phone" placeholder="Your Phone" required>
+                            </div><!-- .anita-grid -->
+                            <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                            <div class="anita-contact-form__footer">
+								<div class="anita-contact-form__submit">
+									<input type="submit" value="Send Message">
+								</div>
+                                <div class="anita-contact-form__response"></div>
+                            </div>
+                        </form>
+					</div>
+				</div><!-- .anita-grid -->
+			</section>
+		</div><!-- .anita-container -->
+	</main>
+
+    <!-- Footer -->
+    <footer id="anita-footer">
+        <div class="anita-footer-inner">
+            <div class="anita-copyright anita-js-copyright"></div>
+            <div class="anita-socials anita-js-socials"></div>
+        </div>
+    </footer>
+
+    <!-- JS Scripts -->
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="js/lib/aos.min.js"></script>
+    <script src="js/core.js"></script>
+</body>
+</html>

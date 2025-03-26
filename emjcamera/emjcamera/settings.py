@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -91,6 +92,14 @@ DATABASES = {
     }
 }
 
+JAZZMIN_SETTINGS = {
+    "site_title": "EMJCAMERA",
+    "site_header": "EMJ Admin Dashboard",
+    "site_brand": "EMJ",
+    "site_icon": "https://example.com/favicon.ico",  # You can add a custom icon
+    "welcome_sign": "Welcome to the EMJCAMERA Admin Dashboard",
+    # More customization options can be found in the documentation
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -128,7 +137,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'portfolio/static'),
+    os.path.join(BASE_DIR, 'static'), 
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 

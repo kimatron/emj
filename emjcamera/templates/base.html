@@ -30,7 +30,7 @@
             <div class="anita-logo-wrapper">
                 <!-- Logo -->
                 <a href="{% url 'home' %}" class="anita-logo is-retina">
-                    <img src="{% static 'img/logo.png' %}" alt="{{ site_settings.site_title }}" width="192" height="80">
+                    <img src="{% static 'img/emjlogo.avif' %}" alt="{{ site_settings.site_title }}" width="192" height="80">
                 </a>
             </div>
             <div class="anita-menu-wrapper">
@@ -74,7 +74,7 @@
     <footer id="anita-footer">
         <div class="anita-footer-inner">
             <div class="anita-copyright">
-                Copyright &copy; {% now "Y" %}. All Rights Reserved.
+                Created by Kim for &copy;EMJcamera {% now "Y" %}. All Rights Reserved.
             </div>
             <div class="anita-socials">
                 <ul class="anita-socials-list">
@@ -99,6 +99,17 @@
     <script src="{% static 'js/lib/jquery.min.js' %}"></script>
     <script src="{% static 'js/lib/aos.min.js' %}"></script>
     <script src="{% static 'js/core.js' %}"></script>
+    <script src="{% static 'js/anita-brickwall.js' %}"></script>
+    <script src="{% static 'js/anita-carousel.js' %}"></script>
+    <script src="{% static 'js/anita-gl-roll.js' %}"></script>
+    <script src="{% static 'js/anita-gl-carousel.js' %}"></script>
+    <script src="{% static 'js/anita-gl-slider.js' %}"></script>
+    <script src="{% static 'js/lib/photoswipe.min.js' %}"></script>
+    <script src="{% static 'js/lib/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/lib/three.min.js' %}"></script>
+
+
+
     {% block extra_js %}{% endblock %}
 </body>
 </html>
