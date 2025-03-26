@@ -76,6 +76,18 @@
             <div class="anita-copyright">
                 Created by Kim for &copy;EMJcamera {% now "Y" %}. All Rights Reserved.
             </div>
+            <div class="anita-contact-links">
+                {% if site_settings.phone %}
+                <a href="tel:{{ site_settings.phone }}" class="anita-footer-link">
+                    <i class="dashicons dashicons-phone"></i> {{ site_settings.phone }}
+                </a>
+                {% endif %}
+                {% if site_settings.email %}
+                <a href="mailto:{{ site_settings.email }}" class="anita-footer-link">
+                    <i class="dashicons dashicons-email"></i> {{ site_settings.email }}
+                </a>
+                {% endif %}
+            </div>
             <div class="anita-socials">
                 <ul class="anita-socials-list">
                     {% if site_settings.instagram_url %}
