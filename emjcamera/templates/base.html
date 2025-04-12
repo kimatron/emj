@@ -22,7 +22,12 @@
     <!-- Favicon -->
     <link rel="icon" href="{% static 'img/favicon.png' %}" sizes="32x32" />
     
-    {% block extra_css %}{% endblock %}
+    {% block extra_css %}
+    .animated-word {
+        display: inline-block;
+        opacity: 1;
+        transition: opacity 0.3s ease;
+    }{% endblock %}
 </head>
 <body>
     <!-- Header -->
@@ -124,6 +129,51 @@
     <script src="{% static 'js/lib/shaders/composer.js' %}"></script>
     <script src="{% static 'js/debug.js' %}"></script>
     {% comment %} <script src="{% static 'js/portfolio-init.js' %}"></script> {% endcomment %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Find the subtitle element
+            const subtitle = document.querySelector('.anita-page-subtitle');
+            
+            // Get the original text content
+            const originalText = subtitle.textContent;
+            
+            // Create a span for the animated word
+            const staticText = 'A Professional ';
+            const animatedText = document.createElement('span');
+            animatedText.id = 'animated-profession';
+            animatedText.className = 'animated-word';
+            
+            // Set up the subtitle with static part + animated part
+            subtitle.innerHTML = staticText;
+            subtitle.appendChild(animatedText);
+            
+            // Words to animate through
+            const words = ['Poo', 'Poopoohead', 'Photographer'];
+            let currentIndex = 0;
+            
+            function changeWord() {
+                // Fade out
+                animatedText.style.opacity = '0';
+                
+                setTimeout(() => {
+                    // Change text
+                    animatedText.textContent = words[currentIndex];
+                    // Fade in
+                    animatedText.style.opacity = '1';
+                    
+                    currentIndex++;
+                    
+                    if (currentIndex < words.length) {
+                        // Schedule next word change
+                        setTimeout(changeWord, 1500);
+                    }
+                }, 300);
+            }
+            
+            // Start animation after a short delay
+            setTimeout(changeWord, 500);
+        });
+        </script>
 
 
 

@@ -4,6 +4,8 @@
 
 {% load static %}
 
+
+
 {% block content %}
 <!-- Page Background -->
 <div class="anita-page-background-wrap">
@@ -20,15 +22,147 @@
                 <h1 class="anita-page-title" data-aos="fade-up">Hey! I am Emilija,</h1>
                 <h2 class="anita-page-subtitle" data-aos="fade-up" data-aos-delay="50">A Professional Photographer</h2>
             </div>
-            <div class="anita-page-intro anita-offset-left--33" data-aos="fade-up" data-aos-delay="100">
-                {{ site_settings.about_text|linebreaks }}
+            
+            <!-- Photographer Bio with Image -->
+            <div class="anita-bio-section">
+                <div class="anita-bio-image" data-aos="fade-right">
+                    <img src="{% static 'img/emilijaprofile.jpeg' %}" alt="Emilija Jefremova">
+                </div>
+                <div class="anita-bio-content" data-aos="fade-left">
+                    {{ site_settings.about_text|linebreaks }}
+                    <p>My approach combines technical precision with artistic intuition, allowing me to capture authentic moments that tell compelling stories. Whether I'm shooting in my studio or on location, I prioritize connection—with my subjects, with light, and with the environment—to create images that resonate.</p>
+                </div>
             </div>
         </section>
 
-        <!-- Section: Counters -->
+        <!-- Photo Showcase -->
+        <section class="anita-section">
+            <div class="anita-photo-showcase" data-aos="fade-up">
+                <div class="anita-showcase-item anita-showcase-item--large">
+                    <img src="{% static 'img/showcase/showcase1.jpeg' %}" alt="Photography sample">
+                </div>
+                <div class="anita-showcase-item">
+                    <img src="{% static 'img/showcase/showcase2.jpg' %}" alt="Photography sample">
+                </div>
+                <div class="anita-showcase-item">
+                    <img src="{% static 'img/showcase/showcase3.jpg' %}" alt="Photography sample">
+                </div>
+            </div>
+        </section>
+
+        <!-- Quote Section -->
+        <section class="anita-section">
+            <div class="anita-quote-banner" data-aos="fade-up">
+                <div class="anita-quote-text">
+                    "Photography is the art of freezing emotions and capturing stories that words cannot express."
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="anita-section">
+            <div class="anita-grid anita-grid--33-66 anita-bottom-gap--medium anita-grid--tablet-1col">
+                <div data-aos="fade-up">
+                    <h2>
+                        <sup>01.</sup>
+                        Services Offered
+                    </h2>
+                </div>
+                <div data-aos="fade-up">
+                    <p>I offer a wide range of photography services to meet your creative and commercial needs. Each service is tailored to your specific requirements, ensuring results that exceed expectations.</p>
+                </div>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="anita-grid anita-grid--3cols anita-grid--tablet-2cols" data-aos="fade-up">
+                <!-- Service 1 -->
+                <div class="anita-service-card">
+                    <div class="anita-service-card__icon">
+                        <img src="{% static 'img/icons/portrait.svg' %}" alt="Portrait Photography">
+                    </div>
+                    <h4>Portrait Photography</h4>
+                    <p>Capturing your unique personality and essence in a stunning portrait session, whether individual, family, or professional.</p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="anita-service-card">
+                    <div class="anita-service-card__icon">
+                        <img src="{% static 'img/icons/wedding.svg' %}" alt="Wedding Photography">
+                    </div>
+                    <h4>Wedding Photography</h4>
+                    <p>Documenting your special day with attention to detail, candid moments, and the emotions that make your celebration unique.</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="anita-service-card">
+                    <div class="anita-service-card__icon">
+                        <img src="{% static 'img/icons/commercial.svg' %}" alt="Commercial Photography">
+                    </div>
+                    <h4>Commercial Photography</h4>
+                    <p>Product, brand, and corporate photography that highlights your business in the best possible light.</p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="anita-service-card">
+                    <div class="anita-service-card__icon">
+                        <img src="{% static 'img/icons/drone.svg' %}" alt="Drone Photography">
+                    </div>
+                    <h4>Drone Photography</h4>
+                    <p>Stunning aerial perspectives that showcase landscapes, properties, and events from breathtaking angles.</p>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="anita-service-card">
+                    <div class="anita-service-card__icon">
+                        <img src="{% static 'img/icons/event.svg' %}" alt="Event Photography">
+                    </div>
+                    <h4>Event Photography</h4>
+                    <p>Coverage of corporate events, parties, concerts, and special occasions with a focus on storytelling.</p>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="anita-service-card">
+                    <div class="anita-service-card__icon">
+                        <img src="{% static 'img/icons/fashion.svg' %}" alt="Fashion Photography">
+                    </div>
+                    <h4>Fashion Photography</h4>
+                    <p>Creative fashion and lifestyle photoshoots for individuals, brands, and publications.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Studio Section -->
+        <section class="anita-section">
+            <div class="anita-grid anita-grid--33-66 anita-bottom-gap--medium anita-grid--tablet-1col">
+                <div data-aos="fade-up">
+                    <h2>
+                        <sup>02.</sup>
+                        My Studio
+                    </h2>
+                </div>
+                <div data-aos="fade-up">
+                    <p>My professional studio is equipped with state-of-the-art lighting and backdrops, providing the perfect environment for portrait, product, and fashion photography. The flexible space can be configured to match your creative vision.</p>
+                </div>
+            </div>
+
+            <!-- Studio Photos -->
+            <div class="anita-grid-gallery-wrapper" data-aos="fade-up">
+                <div class="anita-grid-gallery anita-grid--2cols anita-zoom-hover">
+                    <!-- Grid Item 01 -->
+                    <div class="anita-grid-gallery-item">
+                        <img src="{% static 'img/studio/studio1.jpg' %}" alt="Photography Studio">
+                    </div>
+                    <!-- Grid Item 02 -->
+                    <div class="anita-grid-gallery-item">
+                        <img src="{% static 'img/studio/studio2.jpg' %}" alt="Photography Studio">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats/Counters -->
         <section class="anita-section">
             <div class="anita-grid anita-grid--4cols anita-grid--tablet-2cols">
-                <!-- Counter Element -->
                 <div class="anita-counter" data-delay="3000" data-aos="zoom-out" data-aos-delay="100">
                     <div class="anita-counter-number">
                         7
@@ -37,8 +171,6 @@
                         Years of Experience
                     </div>
                 </div>
-
-                <!-- Counter Element -->
                 <div class="anita-counter" data-delay="3000" data-aos="zoom-out" data-aos-delay="200">
                     <div class="anita-counter-number">
                         24
@@ -47,8 +179,6 @@
                         Awards Won
                     </div>
                 </div>
-
-                <!-- Counter Element -->
                 <div class="anita-counter" data-delay="3000" data-aos="zoom-out" data-aos-delay="300">
                     <div class="anita-counter-number">
                         67
@@ -57,8 +187,6 @@
                         Projects Last Year
                     </div>
                 </div>
-
-                <!-- Counter Element -->
                 <div class="anita-counter" data-delay="3000" data-aos="zoom-out" data-aos-delay="400">
                     <div class="anita-counter-number">
                         215
@@ -70,40 +198,7 @@
             </div>
         </section>
 
-        <!-- Section: Studio/Where I Work -->
-        <section class="anita-section">
-            <div class="anita-grid anita-grid--33-66 anita-bottom-gap--medium anita-grid--tablet-1col">
-                <div data-aos="fade-up">
-                    <h2>
-                        <sup>01.</sup>
-                        Where I Work
-                    </h2>
-                </div>
-                <div data-aos="fade-up">
-                    <p>This is the place where I work with lights and shadows to create something brilliant. My photo studio is a creative space where we can discuss and create your photo portfolio in a comfortable and professional atmosphere.</p>
-                </div>
-            </div>
-
-            <!-- Grid Gallery -->
-            <div class="anita-grid-gallery-wrapper" data-aos="fade-up">
-                <div class="anita-grid-gallery anita-grid--2cols anita-zoom-hover">
-                    <!-- Grid Item 01 -->
-                    <div class="anita-grid-gallery-item">
-                        <a href="{% static 'img/studio/studio01.jpg' %}" class="anita-lightbox-link" data-size="1240x830" data-gallery="studio">
-                            <img src="{% static 'img/studio/studio01.jpg' %}" alt="Studio 01">
-                        </a>
-                    </div>
-                    <!-- Grid Item 02 -->
-                    <div class="anita-grid-gallery-item">
-                        <a href="{% static 'img/studio/studio02.jpg' %}" class="anita-lightbox-link" data-size="1240x830" data-gallery="studio">
-                            <img src="{% static 'img/studio/studio02.jpg' %}" alt="Studio 02">
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section: Get in Touch -->
+        <!-- Contact CTA -->
         <section class="anita-section">
             <div class="anita-cta" data-aos="fade-up">
                 <h2>
@@ -116,4 +211,218 @@
         </section>
     </div>
 </main>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Bio Section */
+    .anita-bio-section {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 40px;
+        margin-top: 40px;
+        align-items: center;
+    }
+    
+    .anita-bio-image img {
+        width: 100%;
+        border-radius: 5px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    }
+    
+    .anita-bio-content {
+        position: relative;
+        padding-left: 20px;
+    }
+    
+    .anita-bio-content:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: linear-gradient(to bottom, var(--anita-s-heading), transparent);
+    }
+    
+    /* Photo Showcase */
+    .anita-photo-showcase {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        grid-template-rows: repeat(2, 1fr);
+        gap: 20px;
+        height: 500px;
+        margin: 60px 0;
+    }
+    
+    .anita-showcase-item {
+        overflow: hidden;
+        border-radius: 5px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    .anita-showcase-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+    }
+    
+    .anita-showcase-item:hover img {
+        transform: scale(1.05);
+    }
+    
+    .anita-showcase-item--large {
+        grid-row: span 2;
+    }
+    
+    /* Quote Banner */
+    .anita-quote-banner {
+        background: var(--anita-s-heading);
+        padding: 60px 40px;
+        border-radius: 5px;
+        margin: 60px 0;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .anita-quote-banner:before {
+        content: '"';
+        position: absolute;
+        font-size: 300px;
+        opacity: 0.1;
+        top: -60px;
+        left: 20px;
+        font-family: serif;
+        color: #fff;
+    }
+    
+    .anita-quote-text {
+        text-align: center;
+        font-size: 24px;
+        line-height: 1.5;
+        font-style: italic;
+        color: #fff;
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+    }
+    
+    /* Service Cards */
+    .anita-service-card {
+        background: var(--anita-s-bg-container);
+        padding: 30px;
+        border-radius: 5px;
+        transition: transform 0.3s, box-shadow 0.3s;
+        margin-bottom: 20px;
+    }
+    
+    .anita-service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    }
+    
+    .anita-service-card__icon {
+        margin-bottom: 20px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .anita-service-card__icon img {
+        max-height: 100%;
+        max-width: 60px;
+    }
+    
+    .anita-service-card h4 {
+        margin-bottom: 15px;
+    }
+    
+    .anita-service-card p {
+        font-size: 0.95rem;
+        opacity: 0.9;
+    }
+    
+    /* Footer styling */
+    .anita-footer-grid {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    .anita-footer-info {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .anita-contact-links {
+        display: flex;
+        gap: 20px;
+        margin-top: 5px;
+    }
+
+    .anita-footer-link {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        transition: color 0.3s;
+    }
+
+    .anita-socials-list {
+        display: flex;
+        gap: 15px;
+    }
+
+    .anita-socials-list li a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        transition: background 0.3s, transform 0.3s;
+    }
+
+    .anita-socials-list li a:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-3px);
+    }
+    
+    /* Responsive adjustments */
+    @media only screen and (max-width: 991px) {
+        .anita-bio-section {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        .anita-photo-showcase {
+            grid-template-columns: 1fr;
+            grid-template-rows: auto;
+            height: auto;
+        }
+        
+        .anita-showcase-item {
+            height: 300px;
+        }
+        
+        .anita-quote-text {
+            font-size: 20px;
+        }
+    }
+    
+    @media only screen and (max-width: 768px) {
+        .anita-footer-grid {
+            flex-direction: column;
+            text-align: center;
+            gap: 20px;
+        }
+        
+        .anita-contact-links {
+            justify-content: center;
+        }
+    }
+</style>
 {% endblock %}
