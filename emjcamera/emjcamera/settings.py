@@ -75,8 +75,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
+    
 ROOT_URLCONF = 'emjcamera.urls'
 
 TEMPLATES = [
@@ -119,6 +121,10 @@ DATABASES = {
         'PORT': os.environ.get('PGPORT', '5432'),
     }
 }
+# For Heroku/Railway-style deployment
+if 'DATABASE_URL' in os.environ:
+    import dj_database_url
+    DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 JAZZMIN_SETTINGS = {
     "site_title": "EMJCAMERA",
