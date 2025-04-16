@@ -2748,7 +2748,7 @@ body.anita-unload.anita-show-menu .anita-nav {
     border-top-color: var(--anita-s-cursor);
     border-radius: 50%;
     opacity: 0;
-    transition: opacity 0.3s, border 0.3s,
+    transition: opacity 0.3s, border 0.3s,;
     will-change: transform, opacity;
 }
 
@@ -3102,4 +3102,5 @@ body.anita-unload.anita-show-menu .anita-nav {
     100% {
         transform: translateX(0);
     }
+}
 }
