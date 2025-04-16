@@ -126,8 +126,9 @@ AWS_DEFAULT_ACL = 'public-read'
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
-AWS_QUERYSTRING_AUTH = False  # Don't add authentication parameters
+AWS_QUERYSTRING_AUTH = False  # Don't add complex authentication-related query parameters to URLs
 AWS_S3_FILE_OVERWRITE = False  # Don't overwrite files with the same name
+AWS_LOCATION = 'media'  # Set a media folder in your bucket
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
@@ -151,7 +152,8 @@ STORAGES = {
         }
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        # Change from CompressedManifestStaticFilesStorage to StaticFilesStorage
+        "BACKEND": "whitenoise.storage.StaticFilesStorage",
     },
 }
 
