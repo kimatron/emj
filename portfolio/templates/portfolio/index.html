@@ -13,12 +13,7 @@
             
             {% for album in featured_albums %}
             <!-- Gallery Item -->
-            <div class="anita-gl-gallery-item" 
-                 data-src="{{ album.cover_image.url }}" 
-                 data-full-url="{{ album.cover_image.url }}"
-                 data-fallback-url="{% static 'img/placeholder.jpg' %}"
-                 data-title="{{ album.title }}"
-                 data-size="1440x1080">
+            <div class="anita-gl-gallery-item" data-src="{{ album.cover_image.url }}" data-size="1440x1080">
                 <div class="anita-gl-gallery-item__content" data-aos="fade-up">
                     <span class="anita-meta anita-gl-gallery__meta">{{ album.category.name }}</span>
                     <h2 class="anita-gl-gallery__caption">
@@ -29,55 +24,30 @@
                 </div>
             </div>
             {% empty %}
-            <!-- No featured albums message -->
-            <div class="anita-gl-gallery-item__content" data-aos="fade-up">
-                <h2 class="anita-gl-gallery__caption">No featured albums found.</h2>
+            <div class="anita-gl-gallery-item">
+                <div class="anita-gl-gallery-item__content" data-aos="fade-up">
+                    <h2 class="anita-gl-gallery__caption">
+                        No albums to display yet
+                    </h2>
+                </div>
             </div>
             {% endfor %}
         </div>
     </div>
 </main>
 {% endblock %}
-
 {% block extra_js %}
+<script src="{% static 'js/lib/three.min.js' %}"></script>
+<script src="{% static 'js/lib/shaders/reflector.js' %}"></script>
+<script src="{% static 'js/anita-gl-carousel.js' %}"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('Production Gallery Fix: Initializing');
-        
-        // Fix gallery URLs for WebGL gallery
-        setTimeout(function() {
-            console.log('Checking gallery items');
-            
-            // Make sure each gallery item has valid URLs
-            const galleryItems = document.querySelectorAll('.anita-gl-gallery-item');
-            galleryItems.forEach(function(item, index) {
-                console.log(`Gallery item ${index}:`, item);
-                
-                // Get the data-src attribute
-                const src = item.getAttribute('data-src');
-                console.log(`Original data-src for item ${index}:`, src);
-                
-                // Check if the URL has issues
-                if (!src || src === 'undefined' || src === 'null') {
-                    // Try to get a fallback
-                    const fallbackUrl = item.getAttribute('data-fallback-url');
-                    if (fallbackUrl) {
-                        console.log(`Setting fallback URL for item ${index}:`, fallbackUrl);
-                        item.setAttribute('data-src', fallbackUrl);
-                    }
-                }
-            });
-            
-            // If the gallery is still not initialized, try to force it
-            if (window.anitaInit && typeof window.anitaInit.glCarousel === 'function') {
-                console.log('Attempting to initialize gallery');
-                try {
-                    window.anitaInit.glCarousel();
-                } catch (e) {
-                    console.error('Gallery initialization error:', e);
-                }
-            }
-        }, 1000);
-    });
+document.addEventListener('DOMContentLoaded', function() {
+    if (jQuery(".anita-gl-carousel-gallery").length) {
+        new Anita_GL_Carousel(jQuery(".anita-gl-carousel-gallery"), {
+            container: jQuery(".anita-main"),
+            nav: true
+        });
+    }
+});
 </script>
 {% endblock %}
