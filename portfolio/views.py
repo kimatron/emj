@@ -3,6 +3,34 @@ from django.contrib import messages
 from .models import Category, Album, Photo, SiteSettings
 from .forms import ContactForm
 
+# Add this to your portfolio/views.py
+
+def debug_media(request):
+    """A debug view to check media URLs and connections"""
+    from django.http import HttpResponse
+    from django.conf import settings  # Add this import
+    from portfolio.models import Album  # Adjust based on your model with images
+    
+    html = ["<h1>Media Debug Info</h1>"]
+    
+    # Environment settings
+    html.append("<h2>Storage Settings</h2>")
+    html.append(f"<p>MEDIA_URL: {settings.MEDIA_URL}</p>")
+    html.append(f"<p>AWS_S3_CUSTOM_DOMAIN: {settings.AWS_S3_CUSTOM_DOMAIN}</p>")
+    html.append(f"<p>DEFAULT_FILE_STORAGE: {settings.DEFAULT_FILE_STORAGE}</p>")
+    
+    # Check images
+    html.append("<h2>Image URLs</h2>")
+    albums = Album.objects.all()
+    for album in albums:
+        if album.cover_image:
+            html.append(f"<p>Album: {album.title}</p>")
+            html.append(f"<p>Image field value: {album.cover_image}</p>")
+            html.append(f"<p>Image URL: {album.cover_image.url}</p>")
+            html.append(f"<img src='{album.cover_image.url}' style='max-width:300px'><hr>")
+    
+    return HttpResponse("".join(html))
+
 def get_site_settings():
     """Helper function to get site settings"""
     return SiteSettings.objects.first() or SiteSettings.objects.create()

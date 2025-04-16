@@ -13,7 +13,10 @@
             
             {% for album in featured_albums %}
             <!-- Gallery Item -->
-            <div class="anita-gl-gallery-item" data-src="{{ album.cover_image.url }}" data-size="1440x1080">
+            <div class="anita-gl-gallery-item" 
+                 data-src="{{ album.cover_image.url }}" 
+                 data-original-url="{{ album.cover_image.url }}"
+                 data-size="1440x1080">
                 <div class="anita-gl-gallery-item__content" data-aos="fade-up">
                     <span class="anita-meta anita-gl-gallery__meta">{{ album.category.name }}</span>
                     <h2 class="anita-gl-gallery__caption">
@@ -24,15 +27,47 @@
                 </div>
             </div>
             {% empty %}
-            <div class="anita-gl-gallery-item">
-                <div class="anita-gl-gallery-item__content" data-aos="fade-up">
-                    <h2 class="anita-gl-gallery__caption">
-                        No albums to display yet
-                    </h2>
-                </div>
+            <!-- No featured albums message -->
+            <div class="anita-gl-gallery-item__content" data-aos="fade-up">
+                <h2 class="anita-gl-gallery__caption">No featured albums found.</h2>
             </div>
             {% endfor %}
         </div>
     </div>
 </main>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('WebGL Gallery Debug: Starting URL inspection');
+        
+        // Log all gallery items
+        const galleryItems = document.querySelectorAll('.anita-gl-gallery-item');
+        galleryItems.forEach(function(item, index) {
+            const src = item.getAttribute('data-src');
+            console.log(`Gallery item ${index} URL:`, src);
+        });
+
+        // Try to manually fix URLs before the gallery initializes
+        setTimeout(function() {
+            console.log('Attempting to fix gallery URLs');
+            
+            galleryItems.forEach(function(item) {
+                const originalUrl = item.getAttribute('data-src');
+                if (originalUrl && originalUrl.includes('/media/')) {
+                    const fixedUrl = originalUrl.replace('/media/', '/');
+                    console.log('Fixing URL:', originalUrl, '->', fixedUrl);
+                    item.setAttribute('data-src', fixedUrl);
+                }
+            });
+            
+            // Force a re-initialization if possible
+            if (window.anitaInit && typeof window.anitaInit.carousel === 'function') {
+                console.log('Attempting to reinitialize gallery');
+                window.anitaInit.carousel();
+            }
+        }, 500);
+    });
+</script>
 {% endblock %}
