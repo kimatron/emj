@@ -15,7 +15,9 @@
             <!-- Gallery Item -->
             <div class="anita-gl-gallery-item" 
                  data-src="{{ album.cover_image.url }}" 
-                 data-original-url="{{ album.cover_image.url }}"
+                 data-full-url="{{ album.cover_image.url }}"
+                 data-fallback-url="{% static 'img/placeholder.jpg' %}"
+                 data-title="{{ album.title }}"
                  data-size="1440x1080">
                 <div class="anita-gl-gallery-item__content" data-aos="fade-up">
                     <span class="anita-meta anita-gl-gallery__meta">{{ album.category.name }}</span>
@@ -40,34 +42,42 @@
 {% block extra_js %}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('WebGL Gallery Debug: Starting URL inspection');
+        console.log('Production Gallery Fix: Initializing');
         
-        // Log all gallery items
-        const galleryItems = document.querySelectorAll('.anita-gl-gallery-item');
-        galleryItems.forEach(function(item, index) {
-            const src = item.getAttribute('data-src');
-            console.log(`Gallery item ${index} URL:`, src);
-        });
-
-        // Try to manually fix URLs before the gallery initializes
+        // Fix gallery URLs for WebGL gallery
         setTimeout(function() {
-            console.log('Attempting to fix gallery URLs');
+            console.log('Checking gallery items');
             
-            galleryItems.forEach(function(item) {
-                const originalUrl = item.getAttribute('data-src');
-                if (originalUrl && originalUrl.includes('/media/')) {
-                    const fixedUrl = originalUrl.replace('/media/', '/');
-                    console.log('Fixing URL:', originalUrl, '->', fixedUrl);
-                    item.setAttribute('data-src', fixedUrl);
+            // Make sure each gallery item has valid URLs
+            const galleryItems = document.querySelectorAll('.anita-gl-gallery-item');
+            galleryItems.forEach(function(item, index) {
+                console.log(`Gallery item ${index}:`, item);
+                
+                // Get the data-src attribute
+                const src = item.getAttribute('data-src');
+                console.log(`Original data-src for item ${index}:`, src);
+                
+                // Check if the URL has issues
+                if (!src || src === 'undefined' || src === 'null') {
+                    // Try to get a fallback
+                    const fallbackUrl = item.getAttribute('data-fallback-url');
+                    if (fallbackUrl) {
+                        console.log(`Setting fallback URL for item ${index}:`, fallbackUrl);
+                        item.setAttribute('data-src', fallbackUrl);
+                    }
                 }
             });
             
-            // Force a re-initialization if possible
-            if (window.anitaInit && typeof window.anitaInit.carousel === 'function') {
-                console.log('Attempting to reinitialize gallery');
-                window.anitaInit.carousel();
+            // If the gallery is still not initialized, try to force it
+            if (window.anitaInit && typeof window.anitaInit.glCarousel === 'function') {
+                console.log('Attempting to initialize gallery');
+                try {
+                    window.anitaInit.glCarousel();
+                } catch (e) {
+                    console.error('Gallery initialization error:', e);
+                }
             }
-        }, 500);
+        }, 1000);
     });
 </script>
 {% endblock %}
