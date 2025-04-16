@@ -113,70 +113,74 @@
         </div>
     </footer>
 
-    <!-- JS Scripts -->
-    <script src="{% static 'js/lib/jquery.min.js' %}"></script>
-    <script src="{% static 'js/lib/aos.min.js' %}"></script>
-    <script src="{% static 'js/core.js' %}"></script>
-    <script src="{% static 'js/anita-brickwall.js' %}"></script>
-    <script src="{% static 'js/anita-carousel.js' %}"></script>
-    <script src="{% static 'js/anita-gl-roll.js' %}"></script>
-    <script src="{% static 'js/anita-gl-carousel.js' %}"></script>
-    <script src="{% static 'js/anita-gl-slider.js' %}"></script>
-    <script src="{% static 'js/lib/photoswipe.min.js' %}"></script>
-    <script src="{% static 'js/lib/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'js/lib/three.min.js' %}"></script>
-    <script src="{% static 'js/lib/shaders/reflector.js' %}"></script>
-    <script src="{% static 'js/lib/shaders/composer.js' %}"></script>
-    <script src="{% static 'js/debug.js' %}"></script>
-    {% comment %} <script src="{% static 'js/portfolio-init.js' %}"></script> {% endcomment %}
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Find the subtitle element
-            const subtitle = document.querySelector('.anita-page-subtitle');
-            
-            // Get the original text content
-            const originalText = subtitle.textContent;
-            
-            // Create a span for the animated word
-            const staticText = 'A Professional ';
-            const animatedText = document.createElement('span');
-            animatedText.id = 'animated-profession';
-            animatedText.className = 'animated-word';
-            
-            // Set up the subtitle with static part + animated part
-            subtitle.innerHTML = staticText;
-            subtitle.appendChild(animatedText);
-            
-            // Words to animate through
-            const words = ['Poo', 'Poopoohead', 'Photographer'];
-            let currentIndex = 0;
-            
-            function changeWord() {
-                // Fade out
-                animatedText.style.opacity = '0';
-                
-                setTimeout(() => {
-                    // Change text
-                    animatedText.textContent = words[currentIndex];
-                    // Fade in
-                    animatedText.style.opacity = '1';
-                    
-                    currentIndex++;
-                    
-                    if (currentIndex < words.length) {
-                        // Schedule next word change
-                        setTimeout(changeWord, 1500);
-                    }
-                }, 300);
+<!-- JS Scripts -->
+<script src="{% static 'js/lib/jquery.min.js' %}"></script>
+<script src="{% static 'js/lib/aos.min.js' %}"></script>
+<script src="{% static 'js/core.js' %}"></script>
+<script src="{% static 'js/anita-brickwall.js' %}"></script>
+<script src="{% static 'js/anita-carousel.js' %}"></script>
+
+<!-- Make sure the order is correct for these WebGL scripts -->
+<script src="{% static 'js/lib/three.min.js' %}"></script>
+<script src="{% static 'js/lib/shaders/reflector.js' %}"></script>
+<script src="{% static 'js/lib/shaders/composer.js' %}"></script>
+<script src="{% static 'js/anita-gl-roll.js' %}"></script>
+<script src="{% static 'js/anita-gl-carousel.js' %}"></script>
+<script src="{% static 'js/anita-gl-slider.js' %}"></script>
+
+<!-- Other libraries -->
+<script src="{% static 'js/lib/photoswipe.min.js' %}"></script>
+<script src="{% static 'js/lib/owl.carousel.min.js' %}"></script>
+
+<!-- Our custom scripts - load these last -->
+<script src="{% static 'js/webgl-failsafe.js' %}"></script>
+<script src="{% static 'js/debug.js' %}"></script>
+
+<!-- Custom initialization script -->
+<script>
+// Safe initialization for all Anita components
+document.addEventListener('DOMContentLoaded', function() {
+    // Ensure safe loading of components
+    if (window.anitaInit) {
+        // Initialize with a slight delay to ensure everything is loaded
+        setTimeout(function() {
+            // Initialize each component safely
+            if (typeof window.anitaInit.carousel === 'function') {
+                try {
+                    window.anitaInit.carousel();
+                } catch (e) {
+                    console.warn('Carousel init error:', e);
+                }
             }
             
-            // Start animation after a short delay
-            setTimeout(changeWord, 500);
-        });
-        </script>
+            if (typeof window.anitaInit.glCarousel === 'function') {
+                try {
+                    window.anitaInit.glCarousel();
+                } catch (e) {
+                    console.warn('GL Carousel init error:', e);
+                }
+            }
+            
+            if (typeof window.anitaInit.glRoll === 'function') {
+                try {
+                    window.anitaInit.glRoll();
+                } catch (e) {
+                    console.warn('GL Roll init error:', e);
+                }
+            }
+            
+            if (typeof window.anitaInit.glSlider === 'function') {
+                try {
+                    window.anitaInit.glSlider();
+                } catch (e) {
+                    console.warn('GL Slider init error:', e);
+                }
+            }
+        }, 500);
+    }
+});
+</script>
 
-
-
-    {% block extra_js %}{% endblock %}
+{% block extra_js %}{% endblock %}
 </body>
 </html>
