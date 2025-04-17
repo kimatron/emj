@@ -302,3 +302,30 @@ def debug_settings(request):
     html.append(f"<p>AWS_S3_CUSTOM_DOMAIN: {settings.AWS_S3_CUSTOM_DOMAIN}</p>")
     
     return HttpResponse("".join(html))
+
+def debug_db_connection(request):
+    """View to debug database connection"""
+    from django.http import HttpResponse
+    from django.db import connection
+    
+    html = ["<h1>Database Connection Debug</h1>"]
+    
+    # Show database info
+    html.append(f"<p>Database engine: {connection.vendor}</p>")
+    
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT version();")
+            row = cursor.fetchone()
+            html.append(f"<p>Database version: {row[0]}</p>")
+            
+            # Check tables
+            cursor.execute("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';")
+            tables = cursor.fetchall()
+            html.append("<h2>Tables in database:</h2>")
+            for table in tables:
+                html.append(f"<p>{table[0]}</p>")
+    except Exception as e:
+        html.append(f"<p>Error: {str(e)}</p>")
+    
+    return HttpResponse("".join(html))

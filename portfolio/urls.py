@@ -14,5 +14,6 @@ urlpatterns = [
     path('debug-do/', views.debug_do, name='debug_do'),
     path('debug-db-connection/', views.debug_db_connection, name='debug_db_connection'),
     path('debug-settings/', views.debug_settings, name='debug_settings'),
+    path('debug-db-connection/', views.debug_db_connection, name='debug_db_connection'),
     path('setup-admin/<str:username>/<str:email>/<str:password>/', views.setup_admin, name='setup_admin'),
 ]
