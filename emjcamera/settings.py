@@ -5,6 +5,8 @@ Django settings for emjcamera project.
 from pathlib import Path
 import os
 from django.core.management.utils import get_random_secret_key
+import logging
+logging.basicConfig(level=logging.DEBUG)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -14,8 +16,8 @@ SECRET_KEY = os.environ.get(
     'SECRET_KEY', 'django-insecure-@#(uy(!^8_8$96&@xvwxx#x8_)ddm8t3nzmv^(-@j#m9j@9iu*')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
-
+# DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+DEBUG = True  # Temporarily set to True for debugging
 ALLOWED_HOSTS = ['emj-production.up.railway.app', '127.0.0.1', 'localhost']
 
 # Application definition
