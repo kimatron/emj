@@ -49,6 +49,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# CSRF trusted origins - needed for admin access
+CSRF_TRUSTED_ORIGINS = ['https://emj-production.up.railway.app']
+
 ROOT_URLCONF = 'emjcamera.urls'
 
 TEMPLATES = [
@@ -72,6 +75,7 @@ WSGI_APPLICATION = 'emjcamera.wsgi.application'
 
 # Database configuration
 # Check if we're on Railway (DATABASE_URL will be set)
+
 if 'DATABASE_URL' in os.environ:
     # Railway/production environment
     import dj_database_url
