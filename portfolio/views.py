@@ -223,3 +223,52 @@ def debug_do(request):
         html.append(f"<p>Error connecting to DigitalOcean: {str(e)}</p>")
     
     return HttpResponse("".join(html))
+
+def debug_db_connection(request):
+    """Debug view for database connection"""
+    from django.http import HttpResponse
+    from django.db import connections
+    
+    html = ["<h1>Database Connection Debug</h1>"]
+    
+    try:
+        # Try to query something simple
+        from django.contrib.auth.models import User
+        user_count = User.objects.count()
+        html.append(f"<p>Connection successful! User count: {user_count}</p>")
+        
+        # List all tables
+        cursor = connections['default'].cursor()
+        cursor.execute("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'")
+        tables = cursor.fetchall()
+        html.append("<h2>Tables in database:</h2>")
+        for table in tables:
+            html.append(f"<p>{table[0]}</p>")
+            
+    except Exception as e:
+        html.append(f"<p>Error connecting to database: {str(e)}</p>")
+    
+    return HttpResponse("".join(html))
+
+def debug_settings(request):
+    """Debug view for settings"""
+    from django.http import HttpResponse
+    from django.conf import settings
+    
+    html = ["<h1>Settings Debug</h1>"]
+    
+    # Show key settings
+    html.append("<h2>Key Settings</h2>")
+    html.append(f"<p>DEBUG: {settings.DEBUG}</p>")
+    html.append(f"<p>ALLOWED_HOSTS: {settings.ALLOWED_HOSTS}</p>")
+    html.append(f"<p>STATIC_URL: {settings.STATIC_URL}</p>")
+    html.append(f"<p>MEDIA_URL: {settings.MEDIA_URL}</p>")
+    
+    # DigitalOcean settings
+    html.append("<h2>DigitalOcean Settings</h2>")
+    html.append(f"<p>AWS_ACCESS_KEY_ID: {'✓ Set' if settings.AWS_ACCESS_KEY_ID else '✗ Not Set'}</p>")
+    html.append(f"<p>AWS_STORAGE_BUCKET_NAME: {settings.AWS_STORAGE_BUCKET_NAME}</p>")
+    html.append(f"<p>AWS_S3_ENDPOINT_URL: {settings.AWS_S3_ENDPOINT_URL}</p>")
+    html.append(f"<p>AWS_S3_CUSTOM_DOMAIN: {settings.AWS_S3_CUSTOM_DOMAIN}</p>")
+    
+    return HttpResponse("".join(html))

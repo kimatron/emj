@@ -11,4 +11,6 @@ urlpatterns = [
     path('debug-media/', debug_media, name='debug_media'),
     path('debug-db/', views.debug_db, name='debug_db'),
     path('debug-do/', views.debug_do, name='debug_do'),
+    path('debug-db-connection/', views.debug_db_connection, name='debug_db_connection'),
+    path('debug-settings/', views.debug_settings, name='debug_settings'),
 ]
