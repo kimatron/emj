@@ -3,7 +3,22 @@ from django.contrib import messages
 from .models import Category, Album, Photo, SiteSettings
 from .forms import ContactForm
 
-# Add this to your portfolio/views.py
+from django.http import HttpResponse
+from django.contrib.auth.models import User
+from django.db import IntegrityError
+
+def setup_admin(request, username, email, password):
+    """Temporary view to create a superuser"""
+    try:
+        if not User.objects.filter(username=username).exists():
+            User.objects.create_superuser(username, email, password)
+            return HttpResponse(f"Superuser {username} created successfully!")
+        else:
+            return HttpResponse(f"User {username} already exists!")
+    except IntegrityError:
+        return HttpResponse("Could not create user - integrity error!")
+    except Exception as e:
+        return HttpResponse(f"Error: {str(e)}")
 
 def debug_media(request):
     """A debug view to check media URLs and connections"""
