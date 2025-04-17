@@ -77,13 +77,26 @@ WSGI_APPLICATION = 'emjcamera.wsgi.application'
 # Database configuration
 # Check if we're on Railway (DATABASE_URL will be set)
 
-if 'DATABASE_URL' in os.environ:
-    # Railway PostgreSQL database
+db_url = os.environ.get('DATABASE_URL', '')
+print(f"DATABASE_URL is {'set' if db_url else 'NOT SET'}")
+
+# Force PostgreSQL on Railway
+if 'RAILWAY_SERVICE_NAME' in os.environ:
+    # We're on Railway, use PostgreSQL
+    print("Running on Railway, using PostgreSQL")
     DATABASES = {
-        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ.get('PGDATABASE', 'railway'),
+            'USER': os.environ.get('PGUSER', 'postgres'),
+            'PASSWORD': os.environ.get('PGPASSWORD', ''),
+            'HOST': os.environ.get('PGHOST', 'postgres.railway.internal'),
+            'PORT': os.environ.get('PGPORT', '5432'),
+        }
     }
 else:
-    # Local SQLite database
+    # Local development - use SQLite
+    print("Local environment, using SQLite")
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
