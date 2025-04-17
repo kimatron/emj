@@ -80,15 +80,32 @@ WSGI_APPLICATION = 'emjcamera.wsgi.application'
 # Database configuration
 import os
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# Get DATABASE_URL or default to SQLite
+DATABASE_URL = os.environ.get('DATABASE_URL')
+if DATABASE_URL:
+    # Print first part of URL (hide password)
+    url_parts = DATABASE_URL.split('@')
+    if len(url_parts) > 1:
+        print(f"Using PostgreSQL: {url_parts[0].split(':')[0]}:***@{url_parts[1]}")
+    else:
+        print(f"Using PostgreSQL (URL format unknown)")
+    
+    # Use PostgreSQL
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=DATABASE_URL,
+            conn_max_age=600,
+        )
     }
-}
-
-# Print some debug info
-print("Using SQLite database for simplicity")
+else:
+    # Use SQLite as fallback
+    print("DATABASE_URL not found, using SQLite")
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # Jazzmin settings
 JAZZMIN_SETTINGS = {
