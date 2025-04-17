@@ -1,0 +1,36 @@
+<!-- WebGL Slider Gallery -->
+<div class="anita-gl-container-wrap anita-gl-slider-gallery-wrap anita-scrollEW">
+  <!-- Album Title -->
+  <div class="anita-fixed-album-title">
+      <div class="anita-album-title">
+          <div class="anita-albums-back-wrap" data-aos="fade-up">
+              <a href="{% url 'album_list' %}" class="anita-albums-back">Back to Galleries</a>
+          </div>
+          <h1 class="anita-page-title" data-aos="fade-up" data-aos-delay="50">{{ album.title }}</h1>
+          <div class="anita-post-meta anita-meta" data-aos="fade-up" data-aos-delay="100">
+              <span>{{ album.category.name }}</span>
+              <span>{{ photos.count }} Photos</span>
+          </div>
+      </div>
+  </div>
+
+  <!-- Album Gallery -->
+  <div class="anita-gl-container anita-gl-slider-gallery" data-type="pixel" data-fit="cover" data-intensity="0.2" data-prev-label="Previous Photo" data-next-label="Next Photo">
+      {% for photo in photos %}
+      <div class="anita-gl-gallery-item" data-src="{{ photo.image.url }}" data-size="1920x1080"></div>
+      {% endfor %}
+  </div>
+
+  <!-- Post Navigation -->
+  {% if next_album %}
+  <div class="anita-album-nav-next" data-aos="fade-left" data-aos-delay="500">
+      <a href="{{ next_album.get_absolute_url }}" class="anita-next-album-link">
+          <div class="anita-data-background" data-src="{{ next_album.cover_image.url }}"></div>
+          <span>
+              Next Album
+              <span class="anita-prev-album-title">{{ next_album.title }}</span>
+          </span>
+      </a>
+  </div>
+  {% endif %}
+</div>

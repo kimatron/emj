@@ -1,0 +1,55 @@
+<!-- Page Container -->
+<div class="anita-container">
+  <!-- Page Title -->
+  <section class="anita-section">
+      <div class="anita-album-title">
+          <div class="anita-albums-back-wrap" data-aos="fade-up">
+              <a href="{% url 'album_list' %}" class="anita-albums-back">Back to Galleries</a>
+          </div>
+          <h1 class="anita-page-title" data-aos="fade-up" data-aos-delay="50">{{ album.title }}</h1>
+          <div class="anita-post-meta anita-meta" data-aos="fade-up" data-aos-delay="100">
+              <span>{{ album.category.name }}</span>
+              <span>{{ photos.count }} Photos</span>
+          </div>
+      </div>
+      {% if album.description %}
+      <div class="anita-page-intro anita-offset-left--33" data-aos="fade-up" data-aos-delay="150">
+          <p>{{ album.description }}</p>
+      </div>
+      {% endif %}
+  </section>
+
+  <!-- Page Content -->
+  <section class="anita-section" data-aos="fade-up">
+      <div class="anita-masonry anita-grid-gallery anita-grid-3cols anita-zoom-hover anita-item-zoom-hover anita-item-fade-hover">
+          {% for photo in photos %}
+          <!-- Gallery Item -->
+          <div class="anita-grid-gallery-item">
+              <div class="anita-grid-item__inner">
+                  <div class="anita-grid-item__image">
+                      <img src="{{ photo.image.url }}" alt="{{ photo.title }}" width="900" height="1080">
+                  </div>
+                  <a href="{{ photo.image.url }}" class="anita-lightbox-link" data-size="900x1080"></a>
+              </div>
+          </div>
+          {% endfor %}
+      </div>
+  </section>
+
+  <!-- Next Album Link -->
+  {% if next_album %}
+  <section class="anita-section">
+      <div class="anita-next-album-wrap">
+          <div class="anita-next-album-title">
+              <h4 data-aos="fade-up" data-aos-offset="20">
+                  Next Album
+              </h4>
+              <a href="{{ next_album.get_absolute_url }}" class="anita-underline anita-caption" data-aos="fade-up" data-aos-delay="50" data-aos-offset="20">
+                  {{ next_album.title }}
+              </a>
+              <div class="anita-page-background" data-src="{{ next_album.cover_image.url }}"></div>
+          </div>
+      </div>
+  </section>
+  {% endif %}
+</div>
