@@ -126,9 +126,10 @@ AWS_DEFAULT_ACL = 'public-read'
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
-AWS_QUERYSTRING_AUTH = False  # Don't add complex authentication-related query parameters to URLs
-AWS_S3_FILE_OVERWRITE = False  # Don't overwrite files with the same name
-AWS_LOCATION = 'media'  # Set a media folder in your bucket
+AWS_QUERYSTRING_AUTH = False
+AWS_S3_FILE_OVERWRITE = False # Don't overwrite files with the same name
+AWS_LOCATION = ''
+
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
@@ -141,18 +142,18 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/"
 
-# Storage configuration
+# Storage configuration with empty location
 STORAGES = {
     "default": {
         "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
         "OPTIONS": {
-            "location": "",  # Remove the media prefix
+            "location": "",  # Empty for root level
             "file_overwrite": False,
             "querystring_auth": False,
+            "default_acl": "public-read",  # Add this - important for permissions
         }
     },
     "staticfiles": {
-        # Change from CompressedManifestStaticFilesStorage to StaticFilesStorage
         "BACKEND": "whitenoise.storage.StaticFilesStorage",
     },
 }

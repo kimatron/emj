@@ -113,3 +113,61 @@ def album_detail(request, slug):
         'next_album': next_album,
     }
     return render(request, 'portfolio/album_detail.html', context)
+
+def debug_db(request):
+    """A debug view to check database connections"""
+    from django.http import HttpResponse
+    from portfolio.models import Album, Category, SiteSettings, Photo
+    
+    html = ["<h1>Database Debug Info</h1>"]
+    
+    # Check SiteSettings
+    html.append("<h2>Site Settings</h2>")
+    site_settings = SiteSettings.objects.first()
+    if site_settings:
+        html.append(f"<p>Site Title: {site_settings.site_title}</p>")
+        html.append(f"<p>Tagline: {site_settings.tagline}</p>")
+        if site_settings.about_image:
+            html.append(f"<p>About Image Path: {site_settings.about_image}</p>")
+            html.append(f"<p>About Image URL: {site_settings.about_image.url}</p>")
+            html.append(f"<img src='{site_settings.about_image.url}' style='max-width:300px'><hr>")
+    else:
+        html.append("<p>No site settings found</p>")
+    
+    # Check Albums
+    html.append("<h2>Albums</h2>")
+    albums = Album.objects.all()
+    if albums:
+        html.append(f"<p>Total Albums: {albums.count()}</p>")
+        html.append(f"<p>Featured Albums: {Album.objects.filter(is_featured=True).count()}</p>")
+        html.append(f"<p>Published Albums: {Album.objects.filter(is_published=True).count()}</p>")
+        
+        for album in albums:
+            html.append(f"<h3>Album: {album.title}</h3>")
+            html.append(f"<p>Published: {album.is_published} | Featured: {album.is_featured}</p>")
+            html.append(f"<p>Category: {album.category.name}</p>")
+            html.append(f"<p>Cover Image Path: {album.cover_image}</p>")
+            html.append(f"<p>Cover Image URL: {album.cover_image.url}</p>")
+            html.append(f"<img src='{album.cover_image.url}' style='max-width:300px'><hr>")
+            
+            # Check photos for this album
+            photos = album.photos.all()
+            html.append(f"<p>Number of photos: {photos.count()}</p>")
+            if photos:
+                first_photo = photos.first()
+                html.append(f"<p>First Photo Path: {first_photo.image}</p>")
+                html.append(f"<p>First Photo URL: {first_photo.image.url}</p>")
+                html.append(f"<img src='{first_photo.image.url}' style='max-width:300px'><hr>")
+    else:
+        html.append("<p>No albums found</p>")
+    
+    # Check Categories
+    html.append("<h2>Categories</h2>")
+    categories = Category.objects.all()
+    if categories:
+        for category in categories:
+            html.append(f"<p>Category: {category.name} - Albums: {category.albums.count()}</p>")
+    else:
+        html.append("<p>No categories found</p>")
+    
+    return HttpResponse("".join(html))
