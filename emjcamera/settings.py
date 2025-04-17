@@ -77,20 +77,34 @@ WSGI_APPLICATION = 'emjcamera.wsgi.application'
 # Database configuration
 # Check if we're on Railway (DATABASE_URL will be set)
 
-db_url = os.environ.get('DATABASE_URL', '')
-print(f"DATABASE_URL is {'set' if db_url else 'NOT SET'}")
+# Database configuration
+import os
 
-# Force PostgreSQL on Railway
-if 'RAILWAY_SERVICE_NAME' in os.environ:
-    # We're on Railway, use PostgreSQL
-    print("Running on Railway, using PostgreSQL")
+# Are we on Railway?
+is_on_railway = 'RAILWAY_SERVICE_NAME' in os.environ
+
+# Get the DATABASE_URL from environment
+database_url = os.environ.get('DATABASE_URL', '')
+print(f"DATABASE_URL is {'set to: ' + database_url[:20] + '...' if database_url else 'NOT SET'}")
+
+# Configure database based on environment
+if is_on_railway and database_url:
+    # We're on Railway with DATABASE_URL, use dj-database-url
+    import dj_database_url
+    print("Using DATABASE_URL for PostgreSQL connection")
+    DATABASES = {
+        'default': dj_database_url.config(default=database_url, conn_max_age=600)
+    }
+elif is_on_railway:
+    # We're on Railway but DATABASE_URL is missing - use environment variables
+    print("Using direct PostgreSQL configuration")
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': os.environ.get('PGDATABASE', 'railway'),
             'USER': os.environ.get('PGUSER', 'postgres'),
             'PASSWORD': os.environ.get('PGPASSWORD', ''),
-            'HOST': os.environ.get('PGHOST', 'postgres.railway.internal'),
+            'HOST': os.environ.get('PGHOST', ''),
             'PORT': os.environ.get('PGPORT', '5432'),
         }
     }
