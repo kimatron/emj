@@ -39,28 +39,32 @@
 {% block extra_js %}
 <script src="{% static 'js/lib/three.min.js' %}"></script>
 <script src="{% static 'js/lib/shaders/reflector.js' %}"></script>
-<script src="{% static 'js/anita-gl-carousel.js' %}"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    if (jQuery(".anita-gl-carousel-gallery").length) {
-        new Anita_GL_Carousel(jQuery(".anita-gl-carousel-gallery"), {
-            container: jQuery(".anita-main"),
-            nav: true
-        });
-    }
+    // Wait for all images to load before initializing
+    window.addEventListener('load', function() {
+        if (jQuery(".anita-gl-carousel-gallery").length) {
+            new Anita_GL_Carousel(jQuery(".anita-gl-carousel-gallery"), {
+                container: jQuery(".anita-main"),
+                nav: true,
+                // Add synchronization option to ensure text and images move together
+                syncElements: true
+            });
+        }
+    });
 });
 </script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Wait a bit to ensure all assets are loaded
-        setTimeout(function() {
+        // Wait for all images to load
+        window.addEventListener('load', function() {
             if (jQuery(".anita-gl-carousel-gallery").length) {
                 new Anita_GL_Carousel(jQuery(".anita-gl-carousel-gallery"), {
                     container: jQuery(".anita-main"),
                     nav: true
                 });
             }
-        }, 1000); // 1 second delay
+        });
     });
-</script>
+    </script>
 {% endblock %}

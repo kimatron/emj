@@ -23,6 +23,12 @@ class Category(models.Model):
 
 class Album(models.Model):
     """Photo album/gallery"""
+    GALLERY_STYLES = (
+        ('grid', 'Grid Layout'),
+        ('slider', 'Slider Gallery'),
+        ('masonry', 'Masonry Grid'),
+    )
+    
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, blank=True)
     description = models.TextField(blank=True)
@@ -33,6 +39,7 @@ class Album(models.Model):
     is_featured = models.BooleanField(default=False)
     is_published = models.BooleanField(default=True)
     order = models.IntegerField(default=0)
+    gallery_style = models.CharField(max_length=10, choices=GALLERY_STYLES, default='grid')
     
     class Meta:
         ordering = ['order', '-date_created']
