@@ -171,3 +171,55 @@ def debug_db(request):
         html.append("<p>No categories found</p>")
     
     return HttpResponse("".join(html))
+
+def debug_do(request):
+    """Debug view for DigitalOcean connection"""
+    from django.http import HttpResponse
+    import boto3
+    from django.conf import settings
+    
+    html = ["<h1>DigitalOcean Spaces Debug</h1>"]
+    
+    # Show settings
+    html.append("<h2>Settings</h2>")
+    html.append(f"<p>AWS_ACCESS_KEY_ID: {'✓ Set' if settings.AWS_ACCESS_KEY_ID else '✗ Not Set'}</p>")
+    html.append(f"<p>AWS_SECRET_ACCESS_KEY: {'✓ Set' if settings.AWS_SECRET_ACCESS_KEY else '✗ Not Set'}</p>")
+    html.append(f"<p>AWS_STORAGE_BUCKET_NAME: {settings.AWS_STORAGE_BUCKET_NAME}</p>")
+    html.append(f"<p>AWS_S3_ENDPOINT_URL: {settings.AWS_S3_ENDPOINT_URL}</p>")
+    html.append(f"<p>AWS_S3_CUSTOM_DOMAIN: {settings.AWS_S3_CUSTOM_DOMAIN}</p>")
+    html.append(f"<p>AWS_DEFAULT_ACL: {settings.AWS_DEFAULT_ACL}</p>")
+    
+    # Try to connect to DigitalOcean
+    try:
+        s3 = boto3.client('s3',
+            endpoint_url=settings.AWS_S3_ENDPOINT_URL,
+            aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+            aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+            region_name='ams3'  # Adjust if needed
+        )
+        
+        # List all objects in the bucket
+        html.append("<h2>Files in Bucket</h2>")
+        response = s3.list_objects_v2(Bucket=settings.AWS_STORAGE_BUCKET_NAME)
+        
+        if 'Contents' in response:
+            for obj in response['Contents']:
+                key = obj['Key']
+                # Make sure key is URL-encoded for direct access
+                from urllib.parse import quote
+                encoded_key = quote(key)
+                url = f"https://{settings.AWS_S3_CUSTOM_DOMAIN}/{encoded_key}"
+                
+                html.append(f"<p>File: {key}</p>")
+                html.append(f"<p>URL: <a href='{url}' target='_blank'>{url}</a></p>")
+                if key.lower().endswith(('.jpg', '.jpeg', '.png', '.gif')):
+                    html.append(f"<img src='{url}' style='max-width:300px'><hr>")
+                else:
+                    html.append("<hr>")
+        else:
+            html.append("<p>No files found in bucket</p>")
+            
+    except Exception as e:
+        html.append(f"<p>Error connecting to DigitalOcean: {str(e)}</p>")
+    
+    return HttpResponse("".join(html))

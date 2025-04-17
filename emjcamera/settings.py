@@ -143,6 +143,7 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/"
 
 # Storage configuration with empty location
+# Storage configuration
 STORAGES = {
     "default": {
         "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
@@ -150,11 +151,11 @@ STORAGES = {
             "location": "",  # Empty for root level
             "file_overwrite": False,
             "querystring_auth": False,
-            "default_acl": "public-read",  # Add this - important for permissions
+            "default_acl": "public-read",  # Important for permissions
         }
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.StaticFilesStorage",
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
 

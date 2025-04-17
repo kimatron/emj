@@ -50,4 +50,17 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Wait a bit to ensure all assets are loaded
+        setTimeout(function() {
+            if (jQuery(".anita-gl-carousel-gallery").length) {
+                new Anita_GL_Carousel(jQuery(".anita-gl-carousel-gallery"), {
+                    container: jQuery(".anita-main"),
+                    nav: true
+                });
+            }
+        }, 1000); // 1 second delay
+    });
+</script>
 {% endblock %}
