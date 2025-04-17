@@ -129,6 +129,21 @@ def album_detail(request, slug):
     }
     return render(request, 'portfolio/album_detail.html', context)
 
+def album_list_by_category(request, slug):
+    """View for displaying albums filtered by category"""
+    category = get_object_or_404(Category, slug=slug)
+    albums = Album.objects.filter(category=category, is_published=True)
+    categories = Category.objects.all()
+    site_settings = get_site_settings()
+    
+    context = {
+        'albums': albums,
+        'categories': categories,
+        'category': category,
+        'site_settings': site_settings,
+    }
+    return render(request, 'portfolio/album_list.html', context)
+
 def debug_db(request):
     """A debug view to check database connections"""
     from django.http import HttpResponse

@@ -8,6 +8,7 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('albums/', views.album_list, name='album_list'),
     path('albums/<slug:slug>/', views.album_detail, name='album_detail'),
+    path('albums/category/<slug:slug>/', views.album_list_by_category, name='album_list_by_category'),
     path('debug-media/', debug_media, name='debug_media'),
     path('debug-db/', views.debug_db, name='debug_db'),
     path('debug-do/', views.debug_do, name='debug_do'),

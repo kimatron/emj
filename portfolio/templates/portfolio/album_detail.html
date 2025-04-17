@@ -12,47 +12,110 @@
 
 <!-- Page Main -->
 <main class="anita-main">
-    <!-- Page Container -->
-    <div class="anita-container">
-        <!-- Page Title -->
-        <section class="anita-section">
-            <div class="anita-album-title">
-                <div class="anita-albums-back-wrap" data-aos="fade-up">
-                    <a href="{% url 'album_list' %}" class="anita-albums-back">Back to Galleries</a>
-                </div>
-                <h1 class="anita-page-title" data-aos="fade-up" data-aos-delay="50">{{ album.title }}</h1>
-                <div class="anita-post-meta anita-meta" data-aos="fade-up" data-aos-delay="100">
-                    <span>{{ album.category.name }}</span>
-                    <span>{{ photos.count }} Photos</span>
-                </div>
-            </div>
-            {% if album.description %}
-            <div class="anita-page-intro anita-offset-left--33" data-aos="fade-up" data-aos-delay="150">
-                <p>{{ album.description }}</p>
-            </div>
-            {% endif %}
-        </section>
-
-        <!-- Page Content - Masonry Grid Gallery -->
-        <section class="anita-section" data-aos="fade-up">
-            <div class="anita-masonry anita-grid-gallery anita-grid-3cols anita-zoom-hover anita-item-zoom-hover anita-item-fade-hover">
-                {% for photo in photos %}
-                <!-- Gallery Item -->
-                <div class="anita-grid-gallery-item">
-                    <div class="anita-grid-item__inner">
-                        <div class="anita-grid-item__image">
-                            <img src="{{ photo.image.url }}" alt="{{ photo.title }}" width="1200" height="960">
-                        </div>
-                        <a href="{{ photo.image.url }}" class="anita-lightbox-link" data-size="1200x960"></a>
+    {% if album.gallery_style == 'slider' %}
+        {% include 'portfolio/gallery_styles/slider_gallery.html' %}
+    {% elif album.gallery_style == 'masonry' %}
+        {% include 'portfolio/gallery_styles/masonry_grid.html' %}
+    {% else %}
+        <!-- Default Grid Gallery -->
+        <div class="anita-container">
+            <!-- Page Title -->
+            <section class="anita-section">
+                <div class="anita-album-title">
+                    <div class="anita-albums-back-wrap" data-aos="fade-up">
+                        <a href="{% url 'album_list' %}" class="anita-albums-back">Back to Galleries</a>
+                    </div>
+                    <h1 class="anita-page-title" data-aos="fade-up" data-aos-delay="50">{{ album.title }}</h1>
+                    <div class="anita-post-meta anita-meta" data-aos="fade-up" data-aos-delay="100">
+                        <span>{{ album.category.name }}</span>
+                        <span>{{ photos.count }} Photos</span>
                     </div>
                 </div>
-                {% empty %}
-                <div class="anita-grid-item__inner">
+                {% if album.description %}
+                <div class="anita-page-intro anita-offset-left--33" data-aos="fade-up" data-aos-delay="150">
+                    <p>{{ album.description }}</p>
+                </div>
+                {% endif %}
+            </section>
+
+            <!-- Page Content - Grid Gallery -->
+            <section class="anita-section" data-aos="fade-up">
+                {% if photos %}
+                <div class="anita-grid-gallery anita-grid-3cols anita-zoom-hover anita-item-zoom-hover anita-item-fade-hover">
+                    {% for photo in photos %}
+                    <!-- Gallery Item -->
+                    <div class="anita-grid-gallery-item">
+                        <div class="anita-grid-item__inner">
+                            <div class="anita-grid-item__image">
+                                <img src="{{ photo.image.url }}" alt="{{ photo.title }}" width="1200" height="960">
+                            </div>
+                            <a href="{{ photo.image.url }}" class="anita-lightbox-link" data-size="1200x960"></a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="anita-empty-gallery">
                     <p>No photos in this album yet.</p>
                 </div>
-                {% endfor %}
-            </div>
-        </section>
-    </div>
+                {% endif %}
+            </section>
+            
+            <!-- Next Album Link -->
+            {% if next_album %}
+            <section class="anita-section">
+                <div class="anita-next-album-wrap">
+                    <div class="anita-next-album-title">
+                        <h4 data-aos="fade-up" data-aos-offset="20">
+                            Next Album
+                        </h4>
+                        <a href="{{ next_album.get_absolute_url }}" class="anita-underline anita-caption" data-aos="fade-up" data-aos-delay="50" data-aos-offset="20">
+                            {{ next_album.title }}
+                        </a>
+                        <div class="anita-page-background" data-src="{{ next_album.cover_image.url }}"></div>
+                    </div>
+                </div>
+            </section>
+            {% endif %}
+        </div>
+    {% endif %}
 </main>
+{% endblock %}
+
+{% block extra_js %}
+{% if album.gallery_style == 'slider' %}
+<script src="{% static 'js/lib/three.min.js' %}"></script>
+<script src="{% static 'js/lib/shaders/reflector.js' %}"></script>
+<script src="{% static 'js/anita-gl-slider.js' %}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    if (jQuery(".anita-gl-slider-gallery").length) {
+        new Anita_GL_Slider(jQuery(".anita-gl-slider-gallery"), {
+            container: jQuery(".anita-main"),
+            nav: true
+        });
+    }
+});
+</script>
+{% elif album.gallery_style == 'masonry' %}
+<script src="{% static 'js/lib/photoswipe.min.js' %}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize photoswipe for the lightbox functionality
+    if (jQuery('.anita-lightbox-link').length) {
+        initPhotoSwipe('.anita-lightbox-link');
+    }
+});
+</script>
+{% else %}
+<script src="{% static 'js/lib/photoswipe.min.js' %}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize photoswipe for the grid gallery
+    if (jQuery('.anita-lightbox-link').length) {
+        initPhotoSwipe('.anita-lightbox-link');
+    }
+});
+</script>
+{% endif %}
 {% endblock %}

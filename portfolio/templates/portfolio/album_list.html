@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
-{% block title %}Galleries | {{ site_settings.site_title }}{% endblock %}
+{% block title %}
+{% if category %}{{ category.name }} | {% endif %}Galleries | {{ site_settings.site_title }}
+{% endblock %}
 
 {% load static %}
 
@@ -17,20 +19,30 @@
         <!-- Page Title -->
         <section class="anita-section">
             <div class="anita-page-title-wrap">
-                <h1 class="anita-page-title" data-aos="fade-up">Photography Galleries</h1>
+                <h1 class="anita-page-title" data-aos="fade-up">
+                    {% if category %}
+                        {{ category.name }} Photography
+                    {% else %}
+                        Photography Galleries
+                    {% endif %}
+                </h1>
             </div>
             <div class="anita-page-intro anita-offset-left--33" data-aos="fade-up" data-aos-delay="100">
-                <p>Explore Emilija Jefremova's photography collections. Each gallery showcases a unique perspective and style captured through her lens.</p>
+                {% if category and category.description %}
+                    <p>{{ category.description }}</p>
+                {% else %}
+                    <p>Explore Emilija Jefremova's photography collections. Each gallery showcases a unique perspective and style captured through her lens.</p>
+                {% endif %}
             </div>
         </section>
 
-        <!-- Category filter (optional) -->
+        <!-- Category filter -->
         {% if categories %}
         <section class="anita-section">
             <div class="anita-brickwall-filter">
-                <a href="#" class="active" data-aos="fade-up">All</a>
-                {% for category in categories %}
-                <a href="#" data-filter="{{ category.slug }}" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:50 }}">{{ category.name }}</a>
+                <a href="{% url 'album_list' %}" class="{% if not category %}active{% endif %}" data-aos="fade-up">All</a>
+                {% for cat in categories %}
+                <a href="{% url 'album_list_by_category' slug=cat.slug %}" class="{% if category.slug == cat.slug %}active{% endif %}" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:50 }}">{{ cat.name }}</a>
                 {% endfor %}
             </div>
         </section>
@@ -41,7 +53,7 @@
             <div class="anita-works-grid anita-grid anita-grid--3cols anita-grid--tablet-2cols anita-item-zoom-hover anita-item-fade-hover">
                 {% for album in albums %}
                 <!-- Album Item -->
-                <div class="anita-works-grid-item brickwall-filter--{{ album.category.slug }}">
+                <div class="anita-works-grid-item">
                     <div class="anita-grid-item__inner">
                         <div class="anita-grid-item__image">
                             <img src="{{ album.cover_image.url }}" alt="{{ album.title }}">
@@ -51,12 +63,12 @@
                             <span>{{ album.photo_count }} Photos</span>
                         </div>
                         <h5>{{ album.title }}</h5>
-                        <a href="{{ album.get_absolute_url }}"></a>
+                        <a href="{% url 'album_detail' slug=album.slug %}"></a>
                     </div>
                 </div>
                 {% empty %}
                 <div class="anita-grid-item__inner">
-                    <p>No albums to display yet.</p>
+                    <p>No albums to display in this category yet.</p>
                 </div>
                 {% endfor %}
             </div>
