@@ -5,6 +5,7 @@ Django settings for emjcamera project.
 from pathlib import Path
 import os
 from django.core.management.utils import get_random_secret_key
+import dj_database_url
 import logging
 logging.basicConfig(level=logging.DEBUG)
 
@@ -77,13 +78,12 @@ WSGI_APPLICATION = 'emjcamera.wsgi.application'
 # Check if we're on Railway (DATABASE_URL will be set)
 
 if 'DATABASE_URL' in os.environ:
-    # Railway/production environment
-    import dj_database_url
+    # Railway PostgreSQL database
     DATABASES = {
-        'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
     }
 else:
-    # Local development - use SQLite
+    # Local SQLite database
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
