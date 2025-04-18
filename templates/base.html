@@ -58,7 +58,7 @@
                     <a href="{% url 'album_list' %}">Galleries</a>
                 </li>
                 <li {% if request.path == '/blog/' %}class="current-menu-item"{% endif %}>
-                    <a href="#">Blog</a>
+                    <a href="{% url 'blog_list' %}">Blog</a>
                 </li>
                 <li {% if request.path == '/shop/' %}class="current-menu-item"{% endif %}>
                     <a href="#">Shop</a>

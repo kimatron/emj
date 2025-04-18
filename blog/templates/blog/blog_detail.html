@@ -1,0 +1,482 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ page_title }}{% endblock %}
+{% block meta_description %}{{ meta_description }}{% endblock %}
+
+{% load static %}
+
+{% block content %}
+<!-- Page Background -->
+<div class="anita-page-background-wrap">
+    <div class="anita-page-background" data-src="{% if post.featured_image %}{{ post.featured_image.url }}{% else %}{% static 'img/background/blog.jpg' %}{% endif %}" data-opacity="0.07"></div>
+</div>
+
+<!-- Page Main -->
+<main class="anita-main">
+    <!-- Page Container -->
+    <div class="anita-container">
+        <!-- Post Header -->
+        <section class="anita-section">
+            <div class="anita-blog-post-header">
+                <div class="anita-back-link-wrap" data-aos="fade-up">
+                    <a href="{% url 'blog_list' %}" class="anita-back-link">Back to Blog</a>
+                </div>
+                <div class="anita-blog-post-meta" data-aos="fade-up" data-aos-delay="50">
+                    <span class="anita-post-category">
+                        <a href="{% url 'blog_category' slug=post.category.slug %}">{{ post.category.name }}</a>
+                    </span>
+                    <span class="anita-post-date">{{ post.published_at|date:"F j, Y" }}</span>
+                </div>
+                <h1 class="anita-post-title" data-aos="fade-up" data-aos-delay="100">{{ post.title }}</h1>
+                {% if post.excerpt %}
+                <div class="anita-post-excerpt" data-aos="fade-up" data-aos-delay="150">
+                    {{ post.excerpt }}
+                </div>
+                {% endif %}
+            </div>
+        </section>
+
+        <!-- Post Content -->
+        <section class="anita-section">
+            <div class="anita-blog-layout">
+                <!-- Main Content -->
+                <div class="anita-blog-main">
+                    {% if post.featured_image %}
+                    <div class="anita-post-featured-image" data-aos="fade-up">
+                        <img src="{{ post.featured_image.url }}" alt="{{ post.title }}">
+                    </div>
+                    {% endif %}
+                    
+                    <div class="anita-post-content" data-aos="fade-up">
+                        {{ post.content|safe }}
+                    </div>
+                    
+                    <!-- Post Tags -->
+                    {% if post.tags.all %}
+                    <div class="anita-post-tags" data-aos="fade-up">
+                        <h4>Tags:</h4>
+                        <div class="anita-tag-list">
+                            {% for tag in post.tags.all %}
+                            <a href="{% url 'blog_tag' slug=tag.slug %}" class="anita-tag">{{ tag.name }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Comments -->
+                    <div class="anita-comments-section" data-aos="fade-up">
+                        <h3>Comments ({{ comments.count }})</h3>
+                        {% if comments %}
+                        <div class="anita-comments-list">
+                            {% for comment in comments %}
+                            <div class="anita-comment">
+                                <div class="anita-comment-avatar">
+                                    <!-- Default avatar -->
+                                    <div class="anita-avatar-placeholder">
+                                        {{ comment.name|first|upper }}
+                                    </div>
+                                </div>
+                                <div class="anita-comment-content">
+                                    <div class="anita-comment-header">
+                                        <h4>{{ comment.name }}</h4>
+                                        <span class="anita-comment-date">{{ comment.created_at|date:"F j, Y" }}</span>
+                                    </div>
+                                    <div class="anita-comment-body">
+                                        {{ comment.content|linebreaks }}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <div class="anita-no-comments">
+                            <p>No comments yet! Be the first to share your thoughts.</p>
+                        </div>
+                        {% endif %}
+                        
+                        <!-- Comment Form -->
+                        <div class="anita-comment-form-section">
+                            <h3>Leave a Comment</h3>
+                            <form method="post" class="anita-comment-form">
+                                {% csrf_token %}
+                                <div class="anita-form-row">
+                                    <div class="anita-input-wrap">
+                                        {{ comment_form.name }}
+                                        <span>Your name</span>
+                                    </div>
+                                </div>
+                                <div class="anita-form-row anita-grid anita-grid--2cols">
+                                    <div class="anita-input-wrap">
+                                        {{ comment_form.email }}
+                                        <span>Your email</span>
+                                    </div>
+                                    <div class="anita-input-wrap">
+                                        {{ comment_form.website }}
+                                        <span>Website (optional)</span>
+                                    </div>
+                                </div>
+                                <div class="anita-form-row">
+                                    <div class="anita-input-wrap">
+                                        {{ comment_form.content }}
+                                        <span>Your comment</span>
+                                    </div>
+                                </div>
+                                <div class="anita-form-row">
+                                    <button type="submit" class="anita-button">Post Comment</button>
+                                </div>
+                                <div class="anita-form-notice">
+                                    Your comment will be visible after approval.
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sidebar -->
+                <div class="anita-blog-sidebar">
+                    <!-- Categories -->
+                    <div class="anita-sidebar-widget" data-aos="fade-left">
+                        <h3 class="anita-sidebar-widget-title">Categories</h3>
+                        <ul class="anita-categories-list">
+                            {% for category in categories %}
+                            <li>
+                                <a href="{% url 'blog_category' slug=category.slug %}">
+                                    {{ category.name }}
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    
+                    <!-- Related Posts -->
+                    {% if related_posts %}
+                    <div class="anita-sidebar-widget" data-aos="fade-left" data-aos-delay="100">
+                        <h3 class="anita-sidebar-widget-title">Related Posts</h3>
+                        <div class="anita-sidebar-posts">
+                            {% for related_post in related_posts %}
+                            <div class="anita-sidebar-post">
+                                {% if related_post.featured_image %}
+                                <a href="{% url 'blog_post_detail' slug=related_post.slug %}" class="anita-sidebar-post-img">
+                                    <img src="{{ related_post.featured_image.url }}" alt="{{ related_post.title }}">
+                                </a>
+                                {% endif %}
+                                <div class="anita-sidebar-post-content">
+                                    <h4>
+                                        <a href="{% url 'blog_post_detail' slug=related_post.slug %}">{{ related_post.title }}</a>
+                                    </h4>
+                                    <span class="anita-sidebar-post-date">{{ related_post.published_at|date:"F j, Y" }}</span>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Blog Post Header */
+    .anita-blog-post-header {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 60px auto;
+    }
+    
+    .anita-back-link-wrap {
+        margin-bottom: 20px;
+    }
+    
+    .anita-back-link {
+        display: inline-flex;
+        align-items: center;
+        color: var(--anita-s-link);
+        position: relative;
+    }
+    
+    .anita-back-link::before {
+        content: "\f341";
+        font-family: "dashicons";
+        color: var(--anita-s-link);
+        font-size: 20px;
+        line-height: 1em;
+        margin-right: 8px;
+    }
+    
+    .anita-blog-post-meta {
+        margin-bottom: 20px;
+        color: var(--anita-s-meta);
+        font-size: var(--anita-t-meta-fs);
+    }
+    
+    .anita-post-category {
+        margin-right: 20px;
+    }
+    
+    .anita-post-category a {
+        color: var(--anita-s-link);
+    }
+    
+    .anita-post-title {
+        margin-bottom: 20px;
+    }
+    
+    .anita-post-excerpt {
+        font-size: 1.2rem;
+        line-height: 1.5;
+        color: var(--anita-s-meta);
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    
+    /* Blog Layout */
+    .anita-blog-layout {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 40px;
+    }
+    
+    /* Post Content */
+    .anita-post-featured-image {
+        margin-bottom: 30px;
+    }
+    
+    .anita-post-featured-image img {
+        width: 100%;
+        border-radius: 5px;
+    }
+    
+    .anita-post-content {
+        margin-bottom: 40px;
+    }
+    
+    .anita-post-content img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px;
+        margin: 20px 0;
+    }
+    
+    .anita-post-content h2,
+    .anita-post-content h3,
+    .anita-post-content h4 {
+        margin-top: 40px;
+    }
+    
+    .anita-post-content blockquote {
+        border-left: 4px solid var(--anita-s-heading);
+        padding-left: 20px;
+        font-style: italic;
+        margin: 30px 0;
+    }
+    
+    /* Post Tags */
+    .anita-post-tags {
+        display: flex;
+        align-items: center;
+        margin-bottom: 50px;
+        padding-bottom: 30px;
+        border-bottom: 1px solid rgba(166, 166, 166, 0.2);
+    }
+    
+    .anita-post-tags h4 {
+        margin: 0 20px 0 0;
+    }
+    
+    .anita-tag-list {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    .anita-tag {
+        display: inline-block;
+        padding: 5px 12px;
+        margin: 0 8px 8px 0;
+        background: var(--anita-s-bg-container);
+        border-radius: 3px;
+        font-size: var(--anita-t-meta-fs);
+        transition: background-color 0.3s, color 0.3s;
+    }
+    
+    .anita-tag:hover {
+        background: var(--anita-s-heading);
+        color: var(--anita-s-bg-body);
+    }
+    
+    /* Comments */
+    .anita-comments-section {
+        margin-bottom: 40px;
+    }
+    
+    .anita-comments-section h3 {
+        margin-bottom: 30px;
+    }
+    
+    .anita-comments-list {
+        margin-bottom: 40px;
+    }
+    
+    .anita-comment {
+        display: flex;
+        margin-bottom: 30px;
+        padding-bottom: 30px;
+        border-bottom: 1px solid rgba(166, 166, 166, 0.1);
+    }
+    
+    .anita-comment-avatar {
+        margin-right: 20px;
+        flex-shrink: 0;
+    }
+    
+    .anita-avatar-placeholder {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: var(--anita-s-heading);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        color: var(--anita-s-bg-body);
+        font-family: var(--anita-t-heading-ff);
+        font-weight: var(--anita-t-heading-fw);
+    }
+    
+    .anita-comment-content {
+        flex-grow: 1;
+    }
+    
+    .anita-comment-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    
+    .anita-comment-header h4 {
+        margin: 0;
+    }
+    
+    .anita-comment-date {
+        font-size: var(--anita-t-meta-fs);
+        color: var(--anita-s-meta);
+    }
+    
+    .anita-no-comments {
+        padding: 30px;
+        background: var(--anita-s-bg-container);
+        border-radius: 5px;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+    
+    /* Comment Form */
+    .anita-comment-form-section {
+        background: var(--anita-s-bg-container);
+        padding: 30px;
+        border-radius: 5px;
+    }
+    
+    .anita-form-row {
+        margin-bottom: 20px;
+    }
+    
+    .anita-form-notice {
+        font-size: var(--anita-t-meta-fs);
+        color: var(--anita-s-meta);
+        font-style: italic;
+        margin-top: 15px;
+    }
+    
+    /* Sidebar */
+    .anita-sidebar-widget {
+        background: var(--anita-s-bg-container);
+        border-radius: 5px;
+        padding: 25px;
+        margin-bottom: 30px;
+    }
+    
+    .anita-sidebar-widget-title {
+        margin-bottom: 20px;
+        position: relative;
+        padding-bottom: 10px;
+    }
+    
+    .anita-sidebar-widget-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 2px;
+        background: var(--anita-s-heading);
+    }
+    
+    .anita-categories-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .anita-categories-list li {
+        padding: 0;
+        margin-bottom: 10px;
+    }
+    
+    .anita-categories-list li a {
+        display: block;
+        padding: 5px 0;
+        color: var(--anita-s-content);
+        transition: color 0.3s, transform 0.3s;
+    }
+    
+    .anita-categories-list li a:hover {
+        color: var(--anita-s-heading);
+        transform: translateX(5px);
+    }
+    
+    .anita-sidebar-post {
+        display: flex;
+        margin-bottom: 20px;
+    }
+    
+    .anita-sidebar-post:last-child {
+        margin-bottom: 0;
+    }
+    
+    .anita-sidebar-post-img {
+        width: 80px;
+        height: 80px;
+        flex-shrink: 0;
+        margin-right: 15px;
+    }
+    
+    .anita-sidebar-post-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 3px;
+    }
+    
+    .anita-sidebar-post-content h4 {
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+    
+    .anita-sidebar-post-date {
+        font-size: var(--anita-t-meta-fs);
+        color: var(--anita-s-meta);
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 991px) {
+        .anita-blog-layout {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}
