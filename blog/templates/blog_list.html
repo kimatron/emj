@@ -1,0 +1,482 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ page_title }}{% endblock %}
+{% block meta_description %}{{ meta_description }}{% endblock %}
+
+{% load static %}
+
+{% block content %}
+<!-- Page Background -->
+<div class="anita-page-background-wrap">
+    <div class="anita-page-background" data-src="{% static 'img/background/blog.jpg' %}" data-opacity="0.07"></div>
+</div>
+
+<!-- Page Main -->
+<main class="anita-main">
+    <!-- Page Container -->
+    <div class="anita-container">
+        <!-- Page Title -->
+        <section class="anita-section">
+            <div class="anita-page-title-wrap">
+                <h1 class="anita-page-title" data-aos="fade-up">The Blog</h1>
+                <h2 class="anita-page-subtitle" data-aos="fade-up" data-aos-delay="50">Photography Musings & Adventures</h2>
+            </div>
+            <div class="anita-page-intro anita-offset-left--33" data-aos="fade-up" data-aos-delay="100">
+                <p>Welcome to my blog, where I share photography tips, behind-the-scenes stories, and occasionally ramble about how my camera is probably smarter than I am. Grab a coffee and stay a while!</p>
+            </div>
+        </section>
+
+        <!-- Blog Content -->
+        <section class="anita-section">
+            <div class="anita-blog-layout">
+                <!-- Main Content -->
+                <div class="anita-blog-main">
+                    <!-- Featured Post (if any) -->
+                    {% if featured_posts.0 and page_obj.number == 1 %}
+                    <div class="anita-featured-post" data-aos="fade-up">
+                        <div class="anita-featured-post-img">
+                            {% if featured_posts.0.featured_image %}
+                            <img src="{{ featured_posts.0.featured_image.url }}" alt="{{ featured_posts.0.title }}">
+                            {% else %}
+                            <img src="{% static 'img/blog/placeholder.jpg' %}" alt="{{ featured_posts.0.title }}">
+                            {% endif %}
+                        </div>
+                        <div class="anita-featured-post-content">
+                            <div class="anita-blog-meta">
+                                <span class="anita-blog-category">{{ featured_posts.0.category.name }}</span>
+                                <span class="anita-blog-date">{{ featured_posts.0.published_at|date:"F j, Y" }}</span>
+                            </div>
+                            <h2 class="anita-blog-title">{{ featured_posts.0.title }}</h2>
+                            <div class="anita-blog-excerpt">
+                                {{ featured_posts.0.excerpt|truncatewords:30 }}
+                            </div>
+                            <a href="{% url 'blog_post_detail' slug=featured_posts.0.slug %}" class="anita-button">Read More</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Blog Posts Grid -->
+                    <div class="anita-blog-grid">
+                        {% for post in posts %}
+                        <!-- Skip the featured post to avoid duplication -->
+                        {% if post != featured_posts.0 or page_obj.number != 1 %}
+                        <div class="anita-blog-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:100 }}">
+                            <div class="anita-blog-card-img">
+                                {% if post.featured_image %}
+                                <img src="{{ post.featured_image.url }}" alt="{{ post.title }}">
+                                {% else %}
+                                <img src="{% static 'img/blog/placeholder.jpg' %}" alt="{{ post.title }}">
+                                {% endif %}
+                                <div class="anita-blog-hover">
+                                    <div class="anita-blog-hover-content">
+                                        <div class="anita-hover-caption">{{ post.excerpt|truncatewords:10 }}</div>
+                                        <span class="anita-hover-more">Read More</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="anita-blog-card-content">
+                                <div class="anita-blog-meta">
+                                    <span class="anita-blog-category">{{ post.category.name }}</span>
+                                    <span class="anita-blog-date">{{ post.published_at|date:"F j, Y" }}</span>
+                                </div>
+                                <h3 class="anita-blog-title">
+                                    <a href="{% url 'blog_post_detail' slug=post.slug %}">{{ post.title }}</a>
+                                </h3>
+                                <div class="anita-blog-excerpt">
+                                    {{ post.excerpt|truncatewords:15 }}
+                                </div>
+                                <a href="{% url 'blog_post_detail' slug=post.slug %}" class="anita-blog-readmore">
+                                    Continue Reading
+                                </a>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% empty %}
+                        <div class="anita-empty-blog">
+                            <p>No blog posts yet - I'm probably busy with my camera or procrastinating by reorganizing my lens collection for the fifth time this week. Check back soon!</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <!-- Pagination -->
+                    {% if posts.paginator.num_pages > 1 %}
+                    <div class="anita-pagination">
+                        {% if posts.has_previous %}
+                            <a href="?page={{ posts.previous_page_number }}" class="anita-pagination-prev">Previous</a>
+                        {% endif %}
+                        
+                        <span class="anita-pagination-current">Page {{ posts.number }} of {{ posts.paginator.num_pages }}</span>
+                        
+                        {% if posts.has_next %}
+                            <a href="?page={{ posts.next_page_number }}" class="anita-pagination-next">Next</a>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Sidebar -->
+                <div class="anita-blog-sidebar">
+                    <!-- Categories -->
+                    <div class="anita-sidebar-widget" data-aos="fade-left">
+                        <h3 class="anita-sidebar-widget-title">Categories</h3>
+                        <ul class="anita-categories-list">
+                            {% for category in categories %}
+                            <li>
+                                <a href="{% url 'blog_category' slug=category.slug %}">
+                                    {{ category.name }}
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    
+                    <!-- Featured Posts -->
+                    {% if featured_posts|length > 1 %}
+                    <div class="anita-sidebar-widget" data-aos="fade-left" data-aos-delay="100">
+                        <h3 class="anita-sidebar-widget-title">Featured Posts</h3>
+                        <div class="anita-sidebar-posts">
+                            {% for post in featured_posts %}
+                            {% if post != featured_posts.0 or page_obj.number != 1 %}
+                            <div class="anita-sidebar-post">
+                                {% if post.featured_image %}
+                                <a href="{% url 'blog_post_detail' slug=post.slug %}" class="anita-sidebar-post-img">
+                                    <img src="{{ post.featured_image.url }}" alt="{{ post.title }}">
+                                </a>
+                                {% endif %}
+                                <div class="anita-sidebar-post-content">
+                                    <h4>
+                                        <a href="{% url 'blog_post_detail' slug=post.slug %}">{{ post.title }}</a>
+                                    </h4>
+                                    <span class="anita-sidebar-post-date">{{ post.published_at|date:"F j, Y" }}</span>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Newsletter Signup -->
+                    <div class="anita-sidebar-widget anita-sidebar-cta" data-aos="fade-left" data-aos-delay="150">
+                        <h3 class="anita-sidebar-widget-title">Join My Photo Adventures</h3>
+                        <p>Subscribe for photography tips, behind-the-scenes stories, and the occasional existential crisis about whether that shot is actually in focus.</p>
+                        <form class="anita-newsletter-form">
+                            <div class="anita-input-wrap">
+                                <input type="email" name="email" required>
+                                <span>Your email</span>
+                            </div>
+                            <button type="submit" class="anita-button">Subscribe</button>
+                        </form>
+                        <div class="anita-newsletter-disclaimer">
+                            I promise not to spam you (my camera would judge me if I did).
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Blog Layout */
+    .anita-blog-layout {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 40px;
+    }
+    
+    /* Featured Post */
+    .anita-featured-post {
+        margin-bottom: 60px;
+        background: var(--anita-s-bg-container);
+        border-radius: 5px;
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .anita-featured-post-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .anita-featured-post-content {
+        padding: 40px;
+    }
+    
+    /* Blog Grid */
+    .anita-blog-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+    
+    .anita-blog-card {
+        background: var(--anita-s-bg-container);
+        border-radius: 5px;
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .anita-blog-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .anita-blog-card-img {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .anita-blog-card-img img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        transition: transform 0.5s;
+    }
+    
+    .anita-blog-card:hover .anita-blog-card-img img {
+        transform: scale(1.05);
+    }
+    
+    .anita-blog-hover {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    
+    .anita-blog-card:hover .anita-blog-hover {
+        opacity: 1;
+    }
+    
+    .anita-blog-hover-content {
+        text-align: center;
+        color: #fff;
+        padding: 20px;
+    }
+    
+    .anita-hover-caption {
+        margin-bottom: 10px;
+    }
+    
+    .anita-hover-more {
+        font-family: var(--anita-t-heading-ff);
+        font-weight: var(--anita-t-heading-fw);
+        border-bottom: 1px solid #fff;
+    }
+    
+    .anita-blog-card-content {
+        padding: 25px;
+    }
+    
+    .anita-blog-meta {
+        display: flex;
+        justify-content: space-between;
+        font-size: var(--anita-t-meta-fs);
+        color: var(--anita-s-meta);
+        margin-bottom: 10px;
+    }
+    
+    .anita-blog-title {
+        margin-bottom: 15px;
+    }
+    
+    .anita-blog-title a {
+        color: var(--anita-s-heading);
+    }
+    
+    .anita-blog-excerpt {
+        margin-bottom: 15px;
+        opacity: 0.8;
+    }
+    
+    .anita-blog-readmore {
+        display: inline-block;
+        color: var(--anita-s-link);
+        position: relative;
+    }
+    
+    .anita-blog-readmore::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: var(--anita-s-link);
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.3s;
+    }
+    
+    .anita-blog-readmore:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+    
+    /* Pagination */
+    .anita-pagination {
+        margin-top: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .anita-pagination-prev,
+    .anita-pagination-next {
+        padding: 8px 16px;
+        background: var(--anita-s-bg-container);
+        border-radius: 3px;
+        color: var(--anita-s-heading);
+        transition: background-color 0.3s;
+    }
+    
+    .anita-pagination-prev:hover,
+    .anita-pagination-next:hover {
+        background: var(--anita-s-heading);
+        color: var(--anita-s-bg-container);
+    }
+    
+    .anita-pagination-current {
+        padding: 0 20px;
+        color: var(--anita-s-content);
+    }
+    
+    /* Sidebar */
+    .anita-sidebar-widget {
+        background: var(--anita-s-bg-container);
+        border-radius: 5px;
+        padding: 25px;
+        margin-bottom: 30px;
+    }
+    
+    .anita-sidebar-widget-title {
+        margin-bottom: 20px;
+        position: relative;
+        padding-bottom: 10px;
+    }
+    
+    .anita-sidebar-widget-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 2px;
+        background: var(--anita-s-heading);
+    }
+    
+    .anita-categories-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .anita-categories-list li {
+        padding: 0;
+        margin-bottom: 10px;
+    }
+    
+    .anita-categories-list li a {
+        display: block;
+        padding: 5px 0;
+        color: var(--anita-s-content);
+        transition: color 0.3s, transform 0.3s;
+    }
+    
+    .anita-categories-list li a:hover {
+        color: var(--anita-s-heading);
+        transform: translateX(5px);
+    }
+    
+    .anita-sidebar-post {
+        display: flex;
+        margin-bottom: 20px;
+    }
+    
+    .anita-sidebar-post:last-child {
+        margin-bottom: 0;
+    }
+    
+    .anita-sidebar-post-img {
+        width: 80px;
+        height: 80px;
+        flex-shrink: 0;
+        margin-right: 15px;
+    }
+    
+    .anita-sidebar-post-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 3px;
+    }
+    
+    .anita-sidebar-post-content h4 {
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+    
+    .anita-sidebar-post-date {
+        font-size: var(--anita-t-meta-fs);
+        color: var(--anita-s-meta);
+    }
+    
+    .anita-sidebar-cta {
+        background: linear-gradient(135deg, var(--anita-s-bg-container) 0%, rgba(66, 66, 72, 1) 100%);
+    }
+    
+    .anita-newsletter-disclaimer {
+        font-size: 12px;
+        opacity: 0.7;
+        margin-top: 10px;
+        font-style: italic;
+    }
+    
+    /* Empty State */
+    .anita-empty-blog {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 60px 20px;
+        background: var(--anita-s-bg-container);
+        border-radius: 5px;
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 991px) {
+        .anita-blog-layout {
+            grid-template-columns: 1fr;
+        }
+        
+        .anita-featured-post {
+            grid-template-columns: 1fr;
+        }
+        
+        .anita-featured-post-img {
+            height: 300px;
+        }
+        
+        .anita-featured-post-img img {
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    
+    @media (max-width: 767px) {
+        .anita-blog-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}
