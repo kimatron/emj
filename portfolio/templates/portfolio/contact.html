@@ -17,90 +17,111 @@
         <!-- Page Title -->
         <section class="anita-section">
             <div class="anita-page-title-wrap">
-                <h1 class="anita-page-title" data-aos="fade-up">Contact Me</h1>
+                <h1 class="anita-page-title" data-aos="fade-up">Get In Touch</h1>
             </div>
-            <div class="anita-page-intro anita-offset-left--33" data-aos="fade-up" data-aos-delay="100">
-                <p>Whether you're looking to book a session, inquire about print availability, or just want to say hello, I'd love to hear from you. Fill out the form below, or reach out directly via the contact information provided.</p>
+            <div class="anita-page-intro anita-colorful-intro" data-aos="fade-up" data-aos-delay="100">
+                <p>Thanks for stopping by! I'd love to hear from you whether you have a project in mind, a question about my services, or just want to say hello. Choose your preferred way to connect below.</p>
             </div>
         </section>
 
-        <!-- Contact Information and Form -->
+        <!-- Contact Cards -->
         <section class="anita-section">
-            <div class="anita-grid anita-grid--33-66 anita-bottom-gap--medium anita-grid--tablet-1col">
-                <!-- Contact Info -->
-                <div data-aos="fade-up">
-                    <div class="anita-widget--contacts__descr">
-                        <h2>
-                            <sup>01.</sup>
-                            Contact Information
-                        </h2>
-                        {{ site_settings.contact_info|linebreaks }}
+            <div class="anita-contact-cards" data-aos="fade-up">
+                <!-- Direct Contact Card -->
+                <div class="anita-contact-card">
+                    <div class="anita-contact-card__icon">
+                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M50 10H10C7.23858 10 5 12.2386 5 15V45C5 47.7614 7.23858 50 10 50H50C52.7614 50 55 47.7614 55 45V15C55 12.2386 52.7614 10 50 10Z" stroke="#E3B505" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M5 15L30 32.5L55 15" stroke="#E3B505" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
                     </div>
-                    <div class="anita-contact-details">
-                        <ul class="anita-contact-details__list has-labels">
-                            <li>
-                                <i class="dashicons dashicons-email"></i>
-                                <a href="mailto:contact@emjcamera.com">info@emjcamera.com</a>
-                            </li>
-                            <li>
-                                <i class="dashicons dashicons-phone"></i>
-                                <a href="tel:+353862226119">+353 (086) 222-6119</a>
-                            </li>
-                            <li>
-                                <i class="dashicons dashicons-location"></i>
-                                <span>Galway, Ireland</span>
-                            </li>
-                            <li>
-                                <i class="dashicons dashicons-calendar-alt"></i>
-                                <span>Monday - Friday: 9am - 6pm<br>Saturday: 10am - 4pm</span>
-                            </li>
-                        </ul>
+                    <h3>Direct Contact</h3>
+                    <div class="anita-contact-card__links">
+                        <a href="mailto:{% if site_settings.email %}{{ site_settings.email }}{% else %}info@emjcamera.com{% endif %}" class="anita-contact-link">
+                            <span class="icon"><i class="dashicons dashicons-email"></i></span>
+                            <span class="text">{% if site_settings.email %}{{ site_settings.email }}{% else %}info@emjcamera.com{% endif %}</span>
+                        </a>
+                        <a href="tel:{% if site_settings.phone %}{{ site_settings.phone }}{% else %}+353862226119{% endif %}" class="anita-contact-link">
+                            <span class="icon"><i class="dashicons dashicons-phone"></i></span>
+                            <span class="text">{% if site_settings.phone %}{{ site_settings.phone }}{% else %}+353 (086) 222-6119{% endif %}</span>
+                        </a>
                     </div>
                 </div>
                 
-                <!-- Contact Form -->
-                <div data-aos="fade-up" data-aos-delay="100">
-                    <h2>
-                        <sup>02.</sup>
-                        Send a Message
-                    </h2>
-                    
-                    {% if messages %}
-                    <div class="anita-alert-success">
-                        {% for message in messages %}
-                            {{ message }}
-                        {% endfor %}
+                <!-- Location & Photography Services Card -->
+                <div class="anita-contact-card">
+                    <div class="anita-contact-card__icon">
+                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M30 32.5C33.4518 32.5 36.25 29.7018 36.25 26.25C36.25 22.7982 33.4518 20 30 20C26.5482 20 23.75 22.7982 23.75 26.25C23.75 29.7018 26.5482 32.5 30 32.5Z" stroke="#6A8EAE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M45 26.25C45 42.5 30 55 30 55C30 55 15 42.5 15 26.25C15 21.5272 16.9747 17.0081 20.4835 13.7335C23.9924 10.4589 28.8179 8.75 33.7854 9.16031C38.7529 9.57061 43.2578 11.9713 46.2645 15.8562C49.2712 19.7411 50.507 24.6915 49.6667 29.5" stroke="#6A8EAE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
                     </div>
+                    <h3>Location & Availability</h3>
+                    <p>Based in beautiful Galway, Ireland. Available for projects nationwide and select international assignments. My schedule varies by project, so get in touch to check availability for your specific dates.</p>
+                    <a href="https://maps.google.com/?q=Galway,Ireland" target="_blank" class="anita-contact-link anita-contact-link--map">
+                        <span class="icon"><i class="dashicons dashicons-location"></i></span>
+                        <span class="text">Galway, Ireland</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Social Media Section -->
+        <section class="anita-section">
+            <div class="anita-social-connect" data-aos="fade-up">
+                <h2>Follow My Work</h2>
+                <p>Stay updated with my latest projects and behind-the-scenes content by following me on social media.</p>
+                
+                <div class="anita-social-icons">
+                    {% if site_settings.instagram_url %}
+                    <a href="{{ site_settings.instagram_url }}" target="_blank" class="anita-social-icon anita-social-icon--instagram">
+                        <svg width="38" height="38" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M16.5 3.5H7.5C5.29086 3.5 3.5 5.29086 3.5 7.5V16.5C3.5 18.7091 5.29086 20.5 7.5 20.5H16.5C18.7091 20.5 20.5 18.7091 20.5 16.5V7.5C20.5 5.29086 18.7091 3.5 16.5 3.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M17.5 8C18.0523 8 18.5 7.55228 18.5 7C18.5 6.44772 18.0523 6 17.5 6C16.9477 6 16.5 6.44772 16.5 7C16.5 7.55228 16.9477 8 17.5 8Z" fill="currentColor"/>
+                        </svg>
+                        <span>Instagram</span>
+                    </a>
                     {% endif %}
                     
-                    <form method="post" action="{% url 'contact' %}" class="anita-contact-form" data-fill-error="Please fill out the form manually.">
-                        {% csrf_token %}
-                        <div class="anita-input-wrap">
-                            <span>{{ form.name.label }}</span>
-                            {{ form.name }}
-                        </div>
-                        <div class="anita-input-wrap">
-                            <span>{{ form.email.label }}</span>
-                            {{ form.email }}
-                        </div>
-                        <div class="anita-input-wrap">
-                            <span>{{ form.phone.label }}</span>
-                            {{ form.phone }}
-                        </div>
-                        <div class="anita-input-wrap">
-                            <span>{{ form.subject.label }}</span>
-                            {{ form.subject }}
-                        </div>
-                        <div class="anita-input-wrap">
-                            <span>{{ form.message.label }}</span>
-                            {{ form.message }}
-                        </div>
-                        <div class="anita-contact-form__footer">
-                            <input type="submit" value="Send Message">
-                            <div class="anita-contact-form__response"></div>
-                        </div>
-                    </form>
+                    {% if site_settings.facebook_url %}
+                    <a href="{{ site_settings.facebook_url }}" target="_blank" class="anita-social-icon anita-social-icon--facebook">
+                        <svg width="38" height="38" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21 12C21 7.03125 16.9688 3 12 3C7.03125 3 3 7.03125 3 12C3 16.9688 7.03125 21 12 21C12.0703 21 12.1406 21 12.2109 21V14.2109H10.2188V12.0703H12.2109V10.5C12.2109 8.66719 13.3125 7.67969 14.9531 7.67969C15.7266 7.67969 16.3828 7.73438 16.5938 7.76562V9.70312H15.5391C14.6953 9.70312 14.5078 10.1016 14.5078 10.6875V12.0703H16.5469L16.2422 14.2109H14.5078V20.4844C18.2578 19.2422 21 15.9141 21 12Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Facebook</span>
+                    </a>
+                    {% endif %}
+                    
+                    {% if site_settings.twitter_url %}
+                    <a href="{{ site_settings.twitter_url }}" target="_blank" class="anita-social-icon anita-social-icon--twitter">
+                        <svg width="38" height="38" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22 4.00002C22 4.00002 21.3 6.10002 20 7.40002C21.6 17.4 10.6 24.7 2 19C4.2 19.1 6.4 18.4 8 17C3 15.5 0.5 9.60002 3 5.00002C5.2 7.60002 8.6 9.10002 12 9.00002C11.1 4.80002 16 2.40002 19 5.20002C20.1 5.20002 22 4.00002 22 4.00002Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Twitter</span>
+                    </a>
+                    {% endif %}
+                    
+                    {% if site_settings.pinterest_url %}
+                    <a href="{{ site_settings.pinterest_url }}" target="_blank" class="anita-social-icon anita-social-icon--pinterest">
+                        <svg width="38" height="38" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12.5 8C10 8 8 9.5 8 11.5C8 13.5 8.5 14.5 10 15C10 14.5 10 14 10.5 13C10.5 13 10.5 12.5 11 13C11 10.5 12 10 12 9C12 9.5 13 9.5 13 10.5C13 11.5 12 12 12 13C12 14 13 14.5 14 14.5C15.5 14.5 16 13 16 11.5C16 9.5 14.5 8 12.5 8Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M10.5 16C8.5 15.5 7.5 14 7 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Pinterest</span>
+                    </a>
+                    {% endif %}
                 </div>
+            </div>
+        </section>
+        
+        <!-- Quick Inquiry Banner -->
+        <section class="anita-section">
+            <div class="anita-inquiry-banner" data-aos="fade-up">
+                <h3>Let's Bring Your Vision to Life!</h3>
+                <p>Whether you need elegant portraits, stunning event coverage, or eye-catching commercial photography, I'm ready to help. Tell me about your project and let's create something beautiful together.</p>
+                <a href="mailto:{% if site_settings.email %}{{ site_settings.email }}{% else %}info@emjcamera.com{% endif %}" class="anita-button">Start Your Project Now</a>
             </div>
         </section>
     </div>
@@ -109,8 +130,4 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/contact.css' %}">
-{% endblock %}
-
-{% block extra_js %}
-<script src="{% static 'js/contact.js' %}"></script>
 {% endblock %}
