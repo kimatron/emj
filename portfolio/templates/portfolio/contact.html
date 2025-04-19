@@ -44,7 +44,8 @@
                             </li>
                             <li>
                                 <i class="dashicons dashicons-phone"></i>
-                                <a href="tel:+353862226119">+353 (086) 222-6119
+                                <a href="tel:+353862226119">+353 (086) 222-6119</a>
+                            </li>
                             <li>
                                 <i class="dashicons dashicons-location"></i>
                                 <span>Galway, Ireland</span>
@@ -106,34 +107,10 @@
 </main>
 {% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+{% endblock %}
+
 {% block extra_js %}
-<script>
-    // JavaScript to handle form label animation on focus/input
-    document.addEventListener('DOMContentLoaded', function() {
-        const inputWraps = document.querySelectorAll('.anita-input-wrap');
-        
-        inputWraps.forEach(wrap => {
-            const input = wrap.querySelector('input, textarea');
-            
-            // Set initial state
-            if (input.value) {
-                wrap.classList.add('is-valued');
-            }
-            
-            // Handle focus
-            input.addEventListener('focus', () => {
-                wrap.classList.add('is-focus');
-                wrap.classList.add('is-valued');
-            });
-            
-            // Handle blur
-            input.addEventListener('blur', () => {
-                wrap.classList.remove('is-focus');
-                if (!input.value) {
-                    wrap.classList.remove('is-valued');
-                }
-            });
-        });
-    });
-</script>
+<script src="{% static 'js/contact.js' %}"></script>
 {% endblock %}
