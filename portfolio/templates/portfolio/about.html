@@ -4,8 +4,6 @@
 
 {% load static %}
 
-
-
 {% block content %}
 <!-- Page Background -->
 <div class="anita-page-background-wrap">
@@ -19,8 +17,8 @@
         <!-- Page Title -->
         <section class="anita-section">
             <div class="anita-page-title-wrap">
-                <h1 class="anita-page-title" data-aos="fade-up">Hey! I am Emilija,</h1>
-                <h2 class="anita-page-subtitle" data-aos="fade-up" data-aos-delay="50">A Professional Photographer</h2>
+                <h1 class="anita-page-title" data-aos="fade-up">Hey there! I'm Emilija,</h1>
+                <h2 class="anita-page-subtitle" data-aos="fade-up" data-aos-delay="50">A Professional Photographer (with an unprofessional sense of humor)</h2>
             </div>
             
             <!-- Photographer Bio with Image -->
@@ -30,7 +28,8 @@
                 </div>
                 <div class="anita-bio-content" data-aos="fade-left">
                     {{ site_settings.about_text|linebreaks }}
-                    <p>My approach combines technical precision with artistic intuition, allowing me to capture authentic moments that tell compelling stories. Whether I'm shooting in my studio or on location, I prioritize connection—with my subjects, with light, and with the environment—to create images that resonate.</p>
+                    <p>My approach combines technical precision with artistic intuition, allowing me to capture authentic moments that tell compelling stories. I'm like that friend who always notices the tiny details – except I have a professional camera and won't bombard you with 47 consecutive selfies.</p>
+                    <p>Whether I'm shooting on location or battling with lighting setups in someone's living room (who needs a studio when the world is your backdrop?), I prioritize connection—with my subjects, with light, and with the environment—to create images that resonate. And yes, I'll make you look good. That's kind of the whole point.</p>
                 </div>
             </div>
         </section>
@@ -54,7 +53,7 @@
         <section class="anita-section">
             <div class="anita-quote-banner" data-aos="fade-up">
                 <div class="anita-quote-text">
-                    "Photography is the art of freezing emotions and capturing stories that words cannot express."
+                    "Photography is the art of freezing moments that would otherwise melt away into the puddle of forgotten memories. Also, it's the only profession where 'shooting people' is perfectly acceptable in polite conversation."
                 </div>
             </div>
         </section>
@@ -69,7 +68,7 @@
                     </h2>
                 </div>
                 <div data-aos="fade-up">
-                    <p>I offer a wide range of photography services to meet your creative and commercial needs. Each service is tailored to your specific requirements, ensuring results that exceed expectations.</p>
+                    <p>I offer a range of photography services. Each service is tailored to your specific requirements, ensuring results that make both of us look good.</p>
                 </div>
             </div>
 
@@ -78,84 +77,149 @@
                 <!-- Service 1 -->
                 <div class="anita-service-card">
                     <div class="anita-service-card__icon">
-                        <img src="{% static 'img/icons/portrait.svg' %}" alt="Portrait Photography">
+                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M30 33.75C34.1421 33.75 37.5 30.3921 37.5 26.25C37.5 22.1079 34.1421 18.75 30 18.75C25.8579 18.75 22.5 22.1079 22.5 26.25C22.5 30.3921 25.8579 33.75 30 33.75Z" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M45 11.25H15C12.9289 11.25 11.25 12.9289 11.25 15V45C11.25 47.0711 12.9289 48.75 15 48.75H45C47.0711 48.75 48.75 47.0711 48.75 45V15C48.75 12.9289 47.0711 11.25 45 11.25Z" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M17.8125 48.75C19.3159 44.6159 22.0806 41.0761 25.7373 38.6072C29.394 36.1383 33.7584 34.8696 38.2031 35C41.0156 35 43.5938 48.75 43.5938 48.75" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
                     </div>
                     <h4>Portrait Photography</h4>
-                    <p>Capturing your unique personality and essence in a stunning portrait session, whether individual, family, or professional.</p>
+                    <p>Capturing your unique personality without the awkward "cheese" smiles. Whether it's individuals, families, or corporate headshots that don't scream "I hate this."</p>
                 </div>
 
                 <!-- Service 2 -->
                 <div class="anita-service-card">
                     <div class="anita-service-card__icon">
-                        <img src="{% static 'img/icons/wedding.svg' %}" alt="Wedding Photography">
+                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M45 18.75L30 11.25L15 18.75V41.25L30 48.75L45 41.25V18.75Z" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M15 18.75L30 26.25L45 18.75" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M30 26.25V48.75" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M22.5 22.5L37.5 15" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
                     </div>
                     <h4>Wedding Photography</h4>
-                    <p>Documenting your special day with attention to detail, candid moments, and the emotions that make your celebration unique.</p>
+                    <p>Documenting your special day with attention to detail, candid moments, and the exact second your best man realizes he forgot his speech.</p>
                 </div>
 
                 <!-- Service 3 -->
                 <div class="anita-service-card">
                     <div class="anita-service-card__icon">
-                        <img src="{% static 'img/icons/commercial.svg' %}" alt="Commercial Photography">
+                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M48.75 15H11.25C9.17893 15 7.5 16.6789 7.5 18.75V41.25C7.5 43.3211 9.17893 45 11.25 45H48.75C50.8211 45 52.5 43.3211 52.5 41.25V18.75C52.5 16.6789 50.8211 15 48.75 15Z" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M37.5 30C37.5 32.0711 35.8211 33.75 33.75 33.75C31.6789 33.75 30 32.0711 30 30C30 27.9289 31.6789 26.25 33.75 26.25C35.8211 26.25 37.5 27.9289 37.5 30Z" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M45 22.5H41.25V18.75" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
                     </div>
                     <h4>Commercial Photography</h4>
-                    <p>Product, brand, and corporate photography that highlights your business in the best possible light.</p>
+                    <p>Product and brand photography that makes your stuff look so good, people will wonder if it's Photoshopped. (It's not. I'm just that good.)</p>
                 </div>
 
                 <!-- Service 4 -->
                 <div class="anita-service-card">
                     <div class="anita-service-card__icon">
-                        <img src="{% static 'img/icons/drone.svg' %}" alt="Drone Photography">
+                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M30 33.75C31.0355 33.75 31.875 32.9105 31.875 31.875C31.875 30.8395 31.0355 30 30 30C28.9645 30 28.125 30.8395 28.125 31.875C28.125 32.9105 28.9645 33.75 30 33.75Z" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M45 26.25C45 37.5 30 48.75 30 48.75C30 48.75 15 37.5 15 26.25C15 22.0978 16.8437 18.1157 20.1256 15.2391C23.4075 12.3625 27.6304 10.875 32.0156 11.25C36.4008 11.625 40.3128 13.5 43.0983 16.4695C45.8839 19.439 47.3594 23.2706 47.1563 27.1875" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M43.125 11.25C46.4063 18.75 39.375 26.25 39.375 26.25" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
                     </div>
-                    <h4>Drone Photography</h4>
-                    <p>Stunning aerial perspectives that showcase landscapes, properties, and events from breathtaking angles.</p>
+                    <h4>Location Scouting</h4>
+                    <p>I'll find the perfect backdrop for your shoot, whether it's urban grit, rolling countryside, or that one wall that matches your Instagram aesthetic.</p>
                 </div>
 
                 <!-- Service 5 -->
                 <div class="anita-service-card">
                     <div class="anita-service-card__icon">
-                        <img src="{% static 'img/icons/event.svg' %}" alt="Event Photography">
+                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M26.25 11.25H18.75C17.7554 11.25 16.8016 11.6451 16.0983 12.3483C15.3951 13.0516 15 14.0054 15 15V45C15 45.9946 15.3951 46.9484 16.0983 47.6517C16.8016 48.3549 17.7554 48.75 18.75 48.75H41.25C42.2446 48.75 43.1984 48.3549 43.9017 47.6517C44.6049 46.9484 45 45.9946 45 45V30" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M41.25 11.25L48.75 18.75" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M26.25 33.75L48.75 11.25" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
                     </div>
                     <h4>Event Photography</h4>
-                    <p>Coverage of corporate events, parties, concerts, and special occasions with a focus on storytelling.</p>
+                    <p>Coverage of parties, concerts, and corporate events. I'll capture all the networking magic and that one colleague who had one too many.</p>
                 </div>
 
                 <!-- Service 6 -->
                 <div class="anita-service-card">
                     <div class="anita-service-card__icon">
-                        <img src="{% static 'img/icons/fashion.svg' %}" alt="Fashion Photography">
+                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M30 48.75C40.3553 48.75 48.75 40.3553 48.75 30C48.75 19.6447 40.3553 11.25 30 11.25C19.6447 11.25 11.25 19.6447 11.25 30C11.25 40.3553 19.6447 48.75 30 48.75Z" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M30 33.75C33.1066 33.75 35.625 31.2316 35.625 28.125C35.625 25.0184 33.1066 22.5 30 22.5C26.8934 22.5 24.375 25.0184 24.375 28.125C24.375 31.2316 26.8934 33.75 30 33.75Z" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M17.5781 42.4219C18.6585 40.2554 20.333 38.4564 22.411 37.2383C24.489 36.0202 26.8861 35.4316 29.3271 35.5392C31.7682 35.6468 34.0967 36.4463 36.0497 37.842C38.0027 39.2377 39.5 41.1703 40.3594 43.4062" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
                     </div>
                     <h4>Fashion Photography</h4>
-                    <p>Creative fashion and lifestyle photoshoots for individuals, brands, and publications.</p>
+                    <p>Creative fashion shots to make anyone look like they just stepped off a runway (even if you normally live in sweatpants—no judgment here).</p>
                 </div>
             </div>
         </section>
 
-        <!-- Studio Section -->
+        <!-- Equipment Section (Replacing Studio) -->
         <section class="anita-section">
             <div class="anita-grid anita-grid--33-66 anita-bottom-gap--medium anita-grid--tablet-1col">
                 <div data-aos="fade-up">
                     <h2>
                         <sup>02.</sup>
-                        My Studio
+                        My Gear
                     </h2>
                 </div>
                 <div data-aos="fade-up">
-                    <p>My professional studio is equipped with state-of-the-art lighting and backdrops, providing the perfect environment for portrait, product, and fashion photography. The flexible space can be configured to match your creative vision.</p>
+                    <p>While the photographer makes the image (not the gear), having the right tools helps. Here's my trusty equipment arsenal that accompanies me on every adventure. Yes, I name my cameras. No, I won't apologize for it.</p>
                 </div>
             </div>
 
-            <!-- Studio Photos -->
-            <div class="anita-grid-gallery-wrapper" data-aos="fade-up">
-                <div class="anita-grid-gallery anita-grid--2cols anita-zoom-hover">
-                    <!-- Grid Item 01 -->
-                    <div class="anita-grid-gallery-item">
-                        <img src="{% static 'img/studio/studio1.jpg' %}" alt="Photography Studio">
+            <!-- Equipment Display -->
+            <div class="anita-equipment-display" data-aos="fade-up">
+                <div class="anita-equipment-card">
+                    <div class="anita-equipment-icon">
+                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M45 15H15C12.2386 15 10 17.2386 10 20V40C10 42.7614 12.2386 45 15 45H45C47.7614 45 50 42.7614 50 40V20C50 17.2386 47.7614 15 45 15Z" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M22.5 30C24.8472 30 26.75 28.0972 26.75 25.75C26.75 23.4028 24.8472 21.5 22.5 21.5C20.1528 21.5 18.25 23.4028 18.25 25.75C18.25 28.0972 20.1528 30 22.5 30Z" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M41.75 24.5V19" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M37.625 39.5C39.0747 39.5 40.25 38.3247 40.25 36.875C40.25 35.4253 39.0747 34.25 37.625 34.25C36.1753 34.25 35 35.4253 35 36.875C35 38.3247 36.1753 39.5 37.625 39.5Z" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M15 45L26.75 30L35 39.5L50 20" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
                     </div>
-                    <!-- Grid Item 02 -->
-                    <div class="anita-grid-gallery-item">
-                        <img src="{% static 'img/studio/studio2.jpg' %}" alt="Photography Studio">
+                    <h4>Primary Camera</h4>
+                    <p>Sony Alpha a7 III (aka "Bertha") - Full-frame mirrorless that's survived rain, weddings, and being dropped exactly once (we don't talk about it).</p>
+                </div>
+                
+                <div class="anita-equipment-card">
+                    <div class="anita-equipment-icon">
+                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 20L30 10L45 20V40L30 50L15 40V20Z" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M15 20L30 30L45 20" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M30 30V50" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
                     </div>
+                    <h4>Lenses</h4>
+                    <p>My holy trinity: 24-70mm f/2.8 for versatility, 85mm f/1.4 for portraits that make people gasp, and a 35mm f/1.8 that's with me even on grocery runs.</p>
+                </div>
+                
+                <div class="anita-equipment-card">
+                    <div class="anita-equipment-icon">
+                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 35H10V45H15V35Z" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M32.5 25H27.5V45H32.5V25Z" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M50 15H45V45H50V15Z" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M5 50H55" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h4>Lighting</h4>
+                    <p>Two Godox flashes that have illuminated everything from corporate events to impromptu dance parties, plus a collection of light modifiers that make people look good even on Monday mornings.</p>
+                </div>
+                
+                <div class="anita-equipment-card">
+                    <div class="anita-equipment-icon">
+                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 15H45V45H15V15Z" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M15 25H45" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M25 25V45" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h4>Extras</h4>
+                    <p>A steady tripod, colorful backdrops, and enough memory cards to document the entire population of a small country. Also, snacks. Lots of snacks.</p>
                 </div>
             </div>
         </section>
@@ -165,7 +229,7 @@
             <div class="anita-grid anita-grid--4cols anita-grid--tablet-2cols">
                 <div class="anita-counter" data-delay="3000" data-aos="zoom-out" data-aos-delay="100">
                     <div class="anita-counter-number">
-                        7
+                        14
                     </div>
                     <div class="anita-counter-label">
                         Years of Experience
@@ -214,215 +278,9 @@
 {% endblock %}
 
 {% block extra_css %}
-<style>
-    /* Bio Section */
-    .anita-bio-section {
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        gap: 40px;
-        margin-top: 40px;
-        align-items: center;
-    }
-    
-    .anita-bio-image img {
-        width: 100%;
-        border-radius: 5px;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-    }
-    
-    .anita-bio-content {
-        position: relative;
-        padding-left: 20px;
-    }
-    
-    .anita-bio-content:before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        width: 3px;
-        background: linear-gradient(to bottom, var(--anita-s-heading), transparent);
-    }
-    
-    /* Photo Showcase */
-    .anita-photo-showcase {
-        display: grid;
-        grid-template-columns: 2fr 1fr;
-        grid-template-rows: repeat(2, 1fr);
-        gap: 20px;
-        height: 500px;
-        margin: 60px 0;
-    }
-    
-    .anita-showcase-item {
-        overflow: hidden;
-        border-radius: 5px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    }
-    
-    .anita-showcase-item img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.5s;
-    }
-    
-    .anita-showcase-item:hover img {
-        transform: scale(1.05);
-    }
-    
-    .anita-showcase-item--large {
-        grid-row: span 2;
-    }
-    
-    /* Quote Banner */
-    .anita-quote-banner {
-        background: var(--anita-s-heading);
-        padding: 60px 40px;
-        border-radius: 5px;
-        margin: 60px 0;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .anita-quote-banner:before {
-        content: '"';
-        position: absolute;
-        font-size: 300px;
-        opacity: 0.1;
-        top: -60px;
-        left: 20px;
-        font-family: serif;
-        color: #fff;
-    }
-    
-    .anita-quote-text {
-        text-align: center;
-        font-size: 24px;
-        line-height: 1.5;
-        font-style: italic;
-        color: #fff;
-        max-width: 800px;
-        margin: 0 auto;
-        position: relative;
-    }
-    
-    /* Service Cards */
-    .anita-service-card {
-        background: var(--anita-s-bg-container);
-        padding: 30px;
-        border-radius: 5px;
-        transition: transform 0.3s, box-shadow 0.3s;
-        margin-bottom: 20px;
-    }
-    
-    .anita-service-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-    }
-    
-    .anita-service-card__icon {
-        margin-bottom: 20px;
-        height: 60px;
-        display: flex;
-        align-items: center;
-    }
-    
-    .anita-service-card__icon img {
-        max-height: 100%;
-        max-width: 60px;
-    }
-    
-    .anita-service-card h4 {
-        margin-bottom: 15px;
-    }
-    
-    .anita-service-card p {
-        font-size: 0.95rem;
-        opacity: 0.9;
-    }
-    
-    /* Footer styling */
-    .anita-footer-grid {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-    }
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
 
-    .anita-footer-info {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .anita-contact-links {
-        display: flex;
-        gap: 20px;
-        margin-top: 5px;
-    }
-
-    .anita-footer-link {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        transition: color 0.3s;
-    }
-
-    .anita-socials-list {
-        display: flex;
-        gap: 15px;
-    }
-
-    .anita-socials-list li a {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.1);
-        transition: background 0.3s, transform 0.3s;
-    }
-
-    .anita-socials-list li a:hover {
-        background: rgba(255, 255, 255, 0.2);
-        transform: translateY(-3px);
-    }
-    
-    /* Responsive adjustments */
-    @media only screen and (max-width: 991px) {
-        .anita-bio-section {
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-        
-        .anita-photo-showcase {
-            grid-template-columns: 1fr;
-            grid-template-rows: auto;
-            height: auto;
-        }
-        
-        .anita-showcase-item {
-            height: 300px;
-        }
-        
-        .anita-quote-text {
-            font-size: 20px;
-        }
-    }
-    
-    @media only screen and (max-width: 768px) {
-        .anita-footer-grid {
-            flex-direction: column;
-            text-align: center;
-            gap: 20px;
-        }
-        
-        .anita-contact-links {
-            justify-content: center;
-        }
-    }
-</style>
+{% block extra_js %}
+<script src="{% static 'js/about.js' %}"></script>
 {% endblock %}
