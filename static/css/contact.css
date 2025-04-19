@@ -1,0 +1,202 @@
+/* Contact Page Styling */
+
+/* Contact Information Section */
+.anita-widget--contacts__descr {
+  margin-bottom: 30px;
+}
+
+/* Fix contact details list alignment */
+.anita-contact-details__list.has-labels > li {
+  position: relative;
+  padding-left: 60px;
+  min-height: 40px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.anita-contact-details__list.has-labels > li:last-child {
+  margin-bottom: 0;
+}
+
+.anita-contact-details__list li i {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--anita-s-heading);
+  color: var(--anita-s-heading);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.anita-contact-details__list li:hover i {
+  transform: scale(1.1);
+  background-color: var(--anita-s-heading);
+  color: var(--anita-s-bg-body);
+}
+
+.anita-contact-details__list li a,
+.anita-contact-details__list li span {
+  display: block;
+  font-size: var(--anita-t-content-fs);
+  transition: transform 0.3s;
+}
+
+.anita-contact-details__list li a:hover {
+  transform: translateX(5px);
+}
+
+/* Form Styling Fixes */
+.anita-contact-form {
+  position: relative;
+  margin-top: 20px;
+}
+
+.anita-input-wrap {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.anita-input-wrap span {
+  position: absolute;
+  left: 17px;
+  top: 16px;
+  transition: color 0.3s, transform 0.3s, font-size 0.3s;
+  transform-origin: 0 0;
+  color: var(--anita-s-input-text);
+  font-size: var(--anita-t-input-fs);
+  line-height: 1.2em;
+  z-index: 5;
+  background: transparent;
+}
+
+.anita-input-wrap span::before {
+  content: '';
+  width: calc(100% + 8px);
+  height: 3px;
+  display: block;
+  position: absolute;
+  left: -4px;
+  bottom: 5px;
+  z-index: -1;
+  background: var(--anita-s-input-background);
+  transition: background-color 0.3s, opacity 0.3s;
+  opacity: 0;
+}
+
+.anita-input-wrap.is-valued span {
+  transform: translate(-1px, -23px);
+  font-size: 12px;
+}
+
+.anita-input-wrap.is-valued span::before {
+  opacity: 1;
+}
+
+.anita-input-wrap.is-focus span {
+  color: var(--anita-s-input-focus-text);
+}
+
+.anita-input-wrap.is-focus span::before {
+  background: var(--anita-s-input-focus-background);
+}
+
+.anita-input-wrap input,
+.anita-input-wrap textarea {
+  width: 100%;
+  display: block;
+  font-family: var(--anita-t-content-ff);
+  font-size: var(--anita-t-input-fs);
+  font-weight: var(--anita-t-content-fw);
+  line-height: 1.2em;
+  color: var(--anita-s-input-text);
+  border: 2px solid var(--anita-s-input-border);
+  background: var(--anita-s-input-background);
+  margin: 0;
+  transition: border 0.3s, color 0.3s, background-color 0.3s;
+  padding: 14px 16px 16px 16px;
+}
+
+.anita-input-wrap input:focus,
+.anita-input-wrap textarea:focus {
+  color: var(--anita-s-input-focus-text);
+  background: var(--anita-s-input-focus-background);
+  border-color: var(--anita-s-input-focus-border);
+  outline: none;
+}
+
+.anita-input-wrap textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+/* Form Button Styling */
+.anita-contact-form__footer {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.anita-contact-form__footer input[type="submit"] {
+  background: var(--anita-s-button-bg);
+  color: var(--anita-s-button-text);
+  border: 2px solid var(--anita-s-button-border);
+  padding: var(--anita-button-padding);
+  font-size: var(--anita-t-button-fs);
+  font-family: var(--anita-t-heading-ff);
+  font-weight: var(--anita-t-heading-fw);
+  transition: background-color 0.3s, color 0.3s, transform 0.3s;
+  cursor: pointer;
+}
+
+.anita-contact-form__footer input[type="submit"]:hover {
+  background: var(--anita-s-button-hover-bg);
+  color: var(--anita-s-button-hover-text);
+  border-color: var(--anita-s-button-hover-border);
+  transform: translateY(-3px);
+}
+
+.anita-contact-form__response {
+  padding-left: 40px;
+  font-size: var(--anita-t-meta-fs);
+  color: var(--anita-s-heading);
+}
+
+/* Success Alert Styling */
+.anita-alert-success {
+  background: rgba(76, 175, 80, 0.1);
+  border-left: 4px solid #4CAF50;
+  padding: 15px;
+  margin-bottom: 20px;
+  color: var(--anita-s-heading);
+  border-radius: 0 4px 4px 0;
+}
+
+/* Responsive adjustments */
+@media only screen and (max-width: 991px) {
+  .anita-contact-form__footer {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+  
+  .anita-contact-form__response {
+      padding-left: 0;
+      margin-top: 15px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .anita-contact-details__list.has-labels > li {
+      padding-left: 50px;
+  }
+  
+  .anita-contact-details__list li i {
+      width: 36px;
+      height: 36px;
+  }
+}
