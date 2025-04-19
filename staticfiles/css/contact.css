@@ -1,0 +1,427 @@
+/* Enhanced Contact Page Styling */
+
+/* Page intro styling */
+.anita-page-intro {
+  max-width: 800px;
+  margin: 0 auto 40px;
+  text-align: center;
+}
+
+.anita-colorful-intro {
+  background: linear-gradient(135deg, rgba(227, 181, 5, 0.05), rgba(106, 142, 174, 0.05));
+  padding: 30px;
+  border-radius: 8px;
+  border-left: 5px solid #E3B505;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.anita-colorful-intro p {
+  font-size: 1.2em;
+  line-height: 1.6;
+}
+
+/* Contact cards section */
+.anita-contact-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.anita-contact-card {
+  background: var(--anita-s-bg-container);
+  border-radius: 8px;
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+  border-left: 5px solid;
+}
+
+.anita-contact-card:nth-child(1) {
+  border-color: #E3B505; /* Yellow gold */
+  background: linear-gradient(135deg, rgba(227, 181, 5, 0.1), transparent 80%);
+}
+
+.anita-contact-card:nth-child(2) {
+  border-color: #6A8EAE; /* Soft blue */
+  background: linear-gradient(135deg, rgba(106, 142, 174, 0.1), transparent 80%);
+}
+
+.anita-contact-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.anita-contact-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(to right, var(--anita-s-heading), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.anita-contact-card:hover::before {
+  opacity: 1;
+}
+
+.anita-contact-card__icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.anita-contact-card__icon::after {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  z-index: 0;
+  transition: transform 0.3s;
+}
+
+/* Colorful icon backgrounds */
+.anita-contact-card:nth-child(1) .anita-contact-card__icon::after {
+  background: rgba(227, 181, 5, 0.2); /* Yellow gold */
+}
+
+.anita-contact-card:nth-child(2) .anita-contact-card__icon::after {
+  background: rgba(106, 142, 174, 0.2); /* Soft blue */
+}
+
+.anita-contact-card:hover .anita-contact-card__icon::after {
+  transform: scale(1.2);
+}
+
+.anita-contact-card__icon svg {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s;
+}
+
+.anita-contact-card:hover .anita-contact-card__icon svg {
+  transform: scale(1.1);
+}
+
+.anita-contact-card h3 {
+  margin-bottom: 15px;
+  font-size: var(--anita-t-h4-fs);
+}
+
+.anita-contact-card p {
+  margin-bottom: 20px;
+  opacity: 0.8;
+}
+
+.anita-contact-card__links {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Contact links styling */
+.anita-contact-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.3s;
+  width: 100%;
+}
+
+.anita-contact-link:hover {
+  background-color: rgba(230, 230, 230, 0.1);
+  transform: translateX(5px);
+}
+
+.anita-contact-link .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.anita-contact-link .icon i {
+  font-size: 18px;
+  color: var(--anita-s-heading);
+}
+
+.anita-contact-link .text {
+  font-size: var(--anita-t-content-fs);
+}
+
+/* Hours styling */
+.anita-hours {
+  width: 100%;
+}
+
+.anita-hours__item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(230, 230, 230, 0.1);
+}
+
+.anita-hours__item:last-child {
+  border-bottom: none;
+}
+
+.anita-hours__item .day {
+  font-weight: var(--anita-t-content-strong-fw);
+}
+
+.anita-hours__item .time {
+  opacity: 0.8;
+}
+
+/* Social media section */
+.anita-social-connect {
+  text-align: center;
+  padding: 60px;
+  background-color: rgba(246, 246, 246, 0.3);
+  border-radius: 8px;
+  margin-top: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.anita-social-connect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(227, 181, 5, 0.05), rgba(106, 142, 174, 0.05));
+  z-index: 0;
+}
+
+.anita-social-connect h2 {
+  margin-bottom: 15px;
+  position: relative;
+  z-index: 1;
+  color: var(--anita-s-heading);
+  font-size: 2rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.anita-social-connect h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #E3B505, #6A8EAE);
+  margin: 20px auto 0;
+  border-radius: 3px;
+}
+
+.anita-social-connect p {
+  max-width: 600px;
+  margin: 0 auto 40px;
+  position: relative;
+  z-index: 1;
+  font-size: 1.1em;
+  color: var(--anita-s-content);
+}
+
+.anita-social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.anita-social-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  padding: 25px 30px;
+  border-radius: 12px;
+  transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+  min-width: 140px;
+  position: relative;
+}
+
+.anita-social-icon:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.anita-social-icon svg {
+  transition: transform 0.3s;
+  height: 38px;
+  width: 38px;
+}
+
+.anita-social-icon:hover svg {
+  transform: scale(1.2);
+}
+
+.anita-social-icon span {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* Add animation to social icons */
+@keyframes float {
+  0% {
+      transform: translateY(0px);
+  }
+  50% {
+      transform: translateY(-10px);
+  }
+  100% {
+      transform: translateY(0px);
+  }
+}
+
+.anita-social-icon:hover {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Social icon specific colors on hover */
+.anita-social-icon--instagram {
+  background: linear-gradient(135deg, rgba(193, 53, 132, 0.1), transparent 80%);
+  border-left: 3px solid #C13584;
+}
+.anita-social-icon--instagram:hover {
+  color: #C13584;
+  background: linear-gradient(135deg, rgba(193, 53, 132, 0.2), transparent 80%);
+}
+
+.anita-social-icon--facebook {
+  background: linear-gradient(135deg, rgba(66, 103, 178, 0.1), transparent 80%);
+  border-left: 3px solid #4267B2;
+}
+.anita-social-icon--facebook:hover {
+  color: #4267B2;
+  background: linear-gradient(135deg, rgba(66, 103, 178, 0.2), transparent 80%);
+}
+
+.anita-social-icon--twitter {
+  background: linear-gradient(135deg, rgba(29, 161, 242, 0.1), transparent 80%);
+  border-left: 3px solid #1DA1F2;
+}
+.anita-social-icon--twitter:hover {
+  color: #1DA1F2;
+  background: linear-gradient(135deg, rgba(29, 161, 242, 0.2), transparent 80%);
+}
+
+.anita-social-icon--pinterest {
+  background: linear-gradient(135deg, rgba(230, 0, 35, 0.1), transparent 80%);
+  border-left: 3px solid #E60023;
+}
+.anita-social-icon--pinterest:hover {
+  color: #E60023;
+  background: linear-gradient(135deg, rgba(230, 0, 35, 0.2), transparent 80%);
+}
+
+/* Quick inquiry banner */
+.anita-inquiry-banner {
+  background: linear-gradient(135deg, #6A8EAE, #E3B505);
+  color: #fff;
+  padding: 60px;
+  border-radius: 8px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.anita-inquiry-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E"),
+  linear-gradient(135deg, rgba(227, 181, 5, 0.3), rgba(106, 142, 174, 0.3));
+  z-index: 1;
+}
+
+.anita-inquiry-banner h3 {
+  color: #fff;
+  font-size: var(--anita-t-h3-fs);
+  margin-bottom: 15px;
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  font-weight: 700;
+}
+
+.anita-inquiry-banner p {
+  max-width: 600px;
+  margin: 0 auto 30px;
+  position: relative;
+  z-index: 2;
+  font-size: 1.1em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.anita-inquiry-banner .anita-button {
+  background: #fff;
+  color: #6A8EAE;
+  border: none;
+  padding: 15px 35px;
+  font-weight: var(--anita-t-content-strong-fw);
+  border-radius: 50px;
+  transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  font-size: 1.1em;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.anita-inquiry-banner .anita-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  background-color: #f8f8f8;
+}
+
+/* Responsive styles */
+@media only screen and (max-width: 991px) {
+  .anita-contact-cards {
+      grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .anita-inquiry-banner {
+      padding: 40px 30px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .anita-contact-cards {
+      grid-template-columns: 1fr;
+  }
+  
+  .anita-social-icons {
+      gap: 15px;
+  }
+  
+  .anita-social-icon {
+      padding: 15px;
+      min-width: 100px;
+  }
+}
